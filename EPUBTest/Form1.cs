@@ -23,8 +23,9 @@ namespace EPUBTest
             InitializeComponent();
            
         }
-         int playorder=1;
 
+         int playorder=1;
+     
         static FileInfo[] GetFiles(string path, string type)
         {
                 var typearr = type.Split(new char[]{';'},StringSplitOptions.RemoveEmptyEntries);
@@ -49,12 +50,12 @@ namespace EPUBTest
         {
             return !str.Contains(part) ;
         }
-        private void CreateNavMap(string path1,NavPoint nav,EPubDocument epub)
+        private void CreateNavMap(string path,NavPoint nav,EPubDocument epub)
         {
-            var dir =new DirectoryInfo(path1);
+            var dir =new DirectoryInfo(path);
             foreach (var folder in dir.GetDirectories( ))
             {
-                if (!folder.Name.Contains("_files"))
+                if (!folder.Name.Contains(tbFolderRule.Text))
                 {
                     var navin = nav.AddNavPoint(folder.Name, folder.Name + ".html", playorder++);
                     CreateNavMap(folder.FullName, navin, epub);
@@ -63,7 +64,7 @@ namespace EPUBTest
                 }
                 else
                 {
-                    foreach (var imgfile   in GetFiles(folder.FullName,".jpg;"))
+                    foreach (var imgfile   in GetFiles(folder.FullName,tbImageRule.Text))
                     {
                          epub.AddImageFile(imgfile.FullName,Path.Combine( folder.Name,imgfile.Name));
                     }
@@ -74,19 +75,29 @@ namespace EPUBTest
                    
                 }
             }
-            foreach (var file in GetFiles(path1,".html;"))
+            foreach (var file in GetFiles(path,tbHtmlRule.Text))
             {
-                epub.AddXhtmlData(file.Name, ReadHtml(file.FullName));
-                nav.AddNavPoint(Path.GetFileNameWithoutExtension(file.Name),file.Name, playorder++);
+                //epub.AddXhtmlData(file.Name, ReadHtml(file.FullName));
+                string epubpath = StringFixer(file.Name, "#");
+                epub.AddXhtmlFile(file.FullName, epubpath);
+                nav.AddNavPoint(Path.GetFileNameWithoutExtension(file.Name),epubpath, playorder++);
               
             }
 
          }
 
+
+
+        /// <summary>
+        /// 写入Html
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         private  string ReadHtml(string path)
         {
             using(var fs=new FileStream(path,FileMode.Open))
             {
+                
                 using (var tr=new StreamReader(fs,Encoding.UTF8))
                 {
                     return tr.ReadToEnd();
@@ -94,10 +105,25 @@ namespace EPUBTest
             }
         }
 
+
+        /// <summary>
+        /// 删除指定字符串，在ncx文件中#等符号不能正确使用
+        /// </summary>
+        /// <param name="s">源字符串</param>
+        /// <param name="part">替换部分</param>
+        /// <returns>去掉空格的返回值</returns>
+        private string StringFixer(string s,string part)
+        {
+            return s.Replace(part,"").Trim();
+        }
+
+
         private void testButton_Click(object sender, EventArgs e)
         {
             var epub = new EPubDocument();
-            string source = @"C:\Users\cheng\Desktop\新建文件夹";
+            string source =tbFolder.Text;
+            
+            //Add metadata
             epub.AddAuthor(textboxAuthor.Text);
             epub.AddTitle(textboxTitle.Text);
             epub.AddLanguage(tbLanguage.Text);
@@ -132,10 +158,13 @@ namespace EPUBTest
 
 
 
-            epub.AddImageFile(picBCover.ImageLocation, "Cover.jpg");
+            epub.AddImageFile(picCover.ImageLocation, "Cover.jpg");
+
+
             var root = epub.AddNavPoint(source, "root", 0);
-           
+            epub.AddNavPoint("Cover", "cover.html", 1);
             CreateNavMap(source,root,epub);
+            epub.AddXhtmlData("cover.html", "<img src='Cover.jpg'/>");
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
 
@@ -154,8 +183,66 @@ namespace EPUBTest
             OpenFileDialog openFileDialog =new OpenFileDialog();
             if (openFileDialog.ShowDialog( ) == DialogResult.OK)
             {
-                picBCover.SizeMode = PictureBoxSizeMode.StretchImage;
-                picBCover.ImageLocation = openFileDialog.FileName;
+                picCover.SizeMode = PictureBoxSizeMode.StretchImage;
+                picCover.ImageLocation = openFileDialog.FileName;
+            }
+        }
+
+ 
+
+        private void tbFolder_DragDrop(object sender, DragEventArgs e)
+        {
+            tbFolder.Text = ((System.Array) e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+        }
+
+        private void tbFolder_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.All;
+            }
+        }
+
+        //private void picCover_DragEnter(object sender, DragEventArgs e)
+        //{
+        //    if (e.Data.GetDataPresent(DataFormats.FileDrop))
+        //    {
+        //        e.Effect = DragDropEffects.All;
+        //    }
+        //}
+
+
+        //private void picCover_DragDrop(object sender, DragEventArgs e)
+        //{
+        //    string file = ((System.Array) e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+          
+        //        if (System.IO.File.Exists(file))
+
+        //            this.picCover.ImageLocation = file;
+        //            // 设置按钮状态
+      
+            
+        //}
+
+        private void Form1_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void Form1_DragDrop(object sender, DragEventArgs e)
+        {
+            int x = this.PointToClient(new Point(e.X, e.Y)).X;
+
+            int y = this.PointToClient(new Point(e.X, e.Y)).Y;
+
+            if (x >= picCover.Location.X && x <= picCover.Location.X + picCover.Width && y >= picCover.Location.Y && y <= picCover.Location.Y + picCover.Height)
+            {
+
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                picCover.SizeMode = PictureBoxSizeMode.StretchImage;
+                picCover.ImageLocation =files[0];
+                
+
             }
         }
     }
