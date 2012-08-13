@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-
-using System.Reflection;
-using System.Resources;
+using System.Collections.Generic;
+//第三方的.dll
+using WizKMControlsLib;
 using EPubDocument = Epub.Document;
 using NavPoint = Epub.NavPoint;
 
+using WizKMCoreLib;
 namespace EPUBTest
 {
     public partial class Form1 : Form
@@ -21,11 +18,17 @@ namespace EPUBTest
         public Form1()
         {
             InitializeComponent();
-           
+            rBRootFolder.Select();
+            InitFolder();
         }
 
-         int playorder=1;
-     
+
+        private int _order = 0;
+        private int _playorder = 0;
+        private string _tempDirectory;
+        private string _source;
+        private Dictionary<string, string> dic=new Dictionary<string, string>(35); 
+
         static FileInfo[] GetFiles(string path, string type)
         {
                 var typearr = type.Split(new char[]{';'},StringSplitOptions.RemoveEmptyEntries);
@@ -35,29 +38,34 @@ namespace EPUBTest
             
         }
 
-        static string HtmlList(string path)
+
+        private WizKMCoreLib.WizDatabase _wizdb=new WizDatabase();
+       
+        private string HtmlList(string path)
         {
             var result = new StringBuilder(25);
-            var fileinfolist = GetFiles(path, ".html;");
+
+            var fileinfolist = GetFiles(path, ".html;xhtml;htm");
+            result.Append("<h1>Content</h1><br>");
             foreach (var fileInfo in fileinfolist)
             {
-                result.Append(fileInfo.Name);
+                var filename=Path.GetFileNameWithoutExtension(fileInfo.Name);
+                result.AppendFormat("<a href={0}>{1}</a>",fileInfo,dic[filename]);
+                result.Append("<br>");
             }
             return result.ToString();
         }
 
-        static bool UnContions(string str,string part)
-        {
-            return !str.Contains(part) ;
-        }
+        
         private void CreateNavMap(string path,NavPoint nav,EPubDocument epub)
         {
             var dir =new DirectoryInfo(path);
+
             foreach (var folder in dir.GetDirectories( ))
             {
                 if (!folder.Name.Contains(tbFolderRule.Text))
                 {
-                    var navin = nav.AddNavPoint(folder.Name, folder.Name + ".html", playorder++);
+                    var navin = nav.AddNavPoint(folder.Name, folder.Name + ".html", _playorder++);
                     CreateNavMap(folder.FullName, navin, epub);
                     epub.AddXhtmlData(folder.Name + ".html", HtmlList(folder.FullName));
                    
@@ -77,32 +85,31 @@ namespace EPUBTest
             }
             foreach (var file in GetFiles(path,tbHtmlRule.Text))
             {
-                //epub.AddXhtmlData(file.Name, ReadHtml(file.FullName));
-                string epubpath = StringFixer(file.Name, "#");
-                epub.AddXhtmlFile(file.FullName, epubpath);
-                nav.AddNavPoint(Path.GetFileNameWithoutExtension(file.Name),epubpath, playorder++);
-              
+                string tempstr;
+                string filename = Path.GetFileNameWithoutExtension(file.Name);
+                if (dic.ContainsKey(filename))
+                    tempstr = dic[filename];
+                else tempstr = filename;
+                string epubpath = StringFixer(tempstr, "#");
+                
+                epub.AddXhtmlFile(file.FullName, file.Name);
+                nav.AddNavPoint(epubpath,file.Name, _playorder++);
+                tempstr = string.Empty;
             }
 
          }
 
 
 
-        /// <summary>
-        /// 写入Html
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        private  string ReadHtml(string path)
+        private string GetTempDirectory()
         {
-            using(var fs=new FileStream(path,FileMode.Open))
+            if (String.IsNullOrEmpty(_tempDirectory))
             {
-                
-                using (var tr=new StreamReader(fs,Encoding.UTF8))
-                {
-                    return tr.ReadToEnd();
-                }
+                _tempDirectory = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+                Directory.CreateDirectory(_tempDirectory);
             }
+
+            return _tempDirectory;
         }
 
 
@@ -111,70 +118,149 @@ namespace EPUBTest
         /// </summary>
         /// <param name="s">源字符串</param>
         /// <param name="part">替换部分</param>
-        /// <returns>去掉空格的返回值</returns>
+        /// <returns>去掉空格的返回值</rteurns>
         private string StringFixer(string s,string part)
         {
             return s.Replace(part,"").Trim();
         }
 
+        private  void InitFolder()
+        {
+            _wizdb.Open("");
+            var folders = _wizdb.Folders;
+            cmBFolder.Items.Add("All");
+            foreach (var folder in folders)
+            {
+                cmBFolder.Items.Add(folder.Name);
 
-        private void testButton_Click(object sender, EventArgs e)
+            }
+            _wizdb.Close();
+        }
+
+        private WizFolder SetFolder ()
+        {
+            _wizdb.Open("");
+           
+            foreach (var folder in _wizdb.Folders)
+            {
+             
+                if (folder.Name == cmBFolder.Text)
+                return folder;
+               
+            }
+            
+            return _wizdb.Folders[3].RootFolder;
+        }
+
+        private List<WizFolder> GetWizFolderList()
+        {
+            List<WizFolder> list=new List<WizFolder>();
+            _wizdb.Open("");
+            foreach (var folder in _wizdb.Folders)
+            {
+                 list.Add(folder);
+            }
+           
+            return list;
+        }
+         
+        private void GetWizHtmlFolder(string htmlfolder,WizFolder wizfolder)
+        {
+
+               ExportHtml(wizfolder, Path.Combine(htmlfolder, wizfolder.Name + "\\"), "0");
+          //  string path = Path.Combine(_wizdb.DatabasePath, cmBFolder.Text+"\\");
+        
+                foreach (var folder in wizfolder.Folders )
+                {
+                    ExportHtml(folder, Path.Combine(htmlfolder, wizfolder.Name + "\\" + folder.Name + "\\"), "0");
+                }
+               
+            //return htmlfolder;
+        }
+
+        void ExportHtml(WizFolder objFolder, string path, string flags)
+        {
+            WizDocumentCollection documents = objFolder.Documents;
+
+           // Parallel.ForEach(objFolder.Documents, doc => awiz(doc));
+            for (var i = 0; i < documents.count; i++)
+            {
+                var objDoc = documents[i];
+                var name = objDoc.Title;
+                var filename = path +MakeValidFileName( name)+".html";
+
+                objDoc.SaveToHtml(filename, flags);
+                //
+            }
+        }
+
+
+       private  string MakeValidFileName(string name) 
+       {
+
+           ++_order;
+           var sb = new StringBuilder();
+           var newname = sb.AppendFormat("{0:000}", _order).ToString();
+           dic.Add(newname,name);
+           return newname;
+       }
+
+
+        private void tbGenerateEpub_Click(object sender, EventArgs e)
         {
             var epub = new EPubDocument();
-            string source =tbFolder.Text;
-            
+            _tempDirectory = GetTempDirectory();
+            List<WizFolder> _list = GetWizFolderList();
+
+            if (cmBFolder.SelectedIndex==0)
+            {
+                foreach (var wizFolder in _list)
+                {
+                    GetWizHtmlFolder(_tempDirectory, wizFolder);
+                }
+                _source = _tempDirectory;
+            }
+            else
+            {
+                GetWizHtmlFolder(_tempDirectory, _list[cmBFolder.SelectedIndex-1]);
+                _source = Path.Combine(_tempDirectory, cmBFolder.Text+"\\");
+            }
+
             //Add metadata
             epub.AddAuthor(textboxAuthor.Text);
             epub.AddTitle(textboxTitle.Text);
             epub.AddLanguage(tbLanguage.Text);
             epub.AddType(tbSubject.Text);
 
-           // String css = EPUBTest.Properties.Resources.style;
 
-            //if (checkBoxFonts.Checked)
-            //{
-            //    css += "\nbody { font-family: LiberationSerif; }\n";
-            //    css += "@font-face { font-family : LiberationSerif; font-weight : normal; font-style: normal; src : url(LiberationSerif-Regular.ttf); }\n";
-            //    css += "@font-face { font-family : LiberationSerif; font-weight : normal; font-style: italic; src : url(LiberationSerif-Italic.ttf); }\n";
-            //    css += "@font-face { font-family : LiberationSerif; font-weight : bold; font-style: normal; src : url(LiberationSerif-Bold.ttf); }\n";
-            //    css += "@font-face { font-family : LiberationSerif; font-weight : bold; font-style: italic; src : url(LiberationSerif-BoldItalic.ttf); }\n";
-
-            //    epub.AddData("LiberationSerif-Regular.ttf", EPUBTest.Properties.Resources.LiberationSerif_Regular, "application/octet-stream");
-            //    epub.AddData("LiberationSerif-Bold.ttf", EPUBTest.Properties.Resources.LiberationSerif_Bold, "application/octet-stream");
-            //    epub.AddData("LiberationSerif-Italic.ttf", EPUBTest.Properties.Resources.LiberationSerif_Italic, "application/octet-stream");
-            //    epub.AddData("LiberationSerif-BoldItalic.ttf", EPUBTest.Properties.Resources.LiberationSerif_BoldItalic, "application/octet-stream");
-            //}
-
-            //epub.AddStylesheetData("style.css", css);
-            //Bitmap coverImg = EPUBTest.Properties.Resources.pngSample;
-            //MemoryStream coverData = new MemoryStream();
-            //coverImg.Save(coverData, ImageFormat.Png);
-            //String coverId = epub.AddImageData("cover.png", coverData.GetBuffer());
-            //epub.AddMetaItem("cover", coverId);
+            if (picCover.Image != null)
+            {
+                epub.AddImageFile(picCover.ImageLocation, "Cover.jpg");
+                epub.AddNavPoint("Cover", "cover.html", _playorder++);
+                epub.AddXhtmlData("cover.html", "<img src='Cover.jpg'/>");
+            }
+            var root = epub.AddNavPoint(cmBFolder.Text, "root.html", _playorder++);
+            epub.AddXhtmlData("root.html", HtmlList(_source));
             
+            CreateNavMap(_source,root,epub);
+          
 
-            //String page_template = Encoding.UTF8.GetString(EPUBTest.Properties.Resources.page);
-
-
-
-
-            epub.AddImageFile(picCover.ImageLocation, "Cover.jpg");
-
-
-            var root = epub.AddNavPoint(source, "root", 0);
-            epub.AddNavPoint("Cover", "cover.html", 1);
-            CreateNavMap(source,root,epub);
-            epub.AddXhtmlData("cover.html", "<img src='Cover.jpg'/>");
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-
-
             saveFileDialog.Filter = "epub files (*.epub)|*.epub|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 1;
             saveFileDialog.RestoreDirectory = true;
-
+            saveFileDialog.FileName = cmBFolder.Text;
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                epub.Generate(saveFileDialog.FileName);
+                try
+                {
+                    epub.Generate(saveFileDialog.FileName, _tempDirectory);
+                    MessageBox.Show("生成EPUB完成：" + saveFileDialog.FileName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("失败:" + ex.Message);
+                }
             }
         }
 
