@@ -90,12 +90,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="LiberationSerif-Bold.ttf" />
-    <None Include="LiberationSerif-BoldItalic.ttf" />
-    <None Include="LiberationSerif-Italic.ttf" />
-    <None Include="LiberationSerif-Regular.ttf" />
     <Content Include="html2xhtml.exe" />
-    <Content Include="page.html" />
+    <None Include="page.xhtml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -83,46 +83,6 @@ namespace Html2Epub.Properties {
         /// <summary>
         ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
-        internal static byte[] LiberationSerif_Bold {
-            get {
-                object obj = ResourceManager.GetObject("LiberationSerif_Bold", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Byte[] 类型的本地化资源。
-        /// </summary>
-        internal static byte[] LiberationSerif_BoldItalic {
-            get {
-                object obj = ResourceManager.GetObject("LiberationSerif_BoldItalic", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Byte[] 类型的本地化资源。
-        /// </summary>
-        internal static byte[] LiberationSerif_Italic {
-            get {
-                object obj = ResourceManager.GetObject("LiberationSerif_Italic", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Byte[] 类型的本地化资源。
-        /// </summary>
-        internal static byte[] LiberationSerif_Regular {
-            get {
-                object obj = ResourceManager.GetObject("LiberationSerif_Regular", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Byte[] 类型的本地化资源。
-        /// </summary>
         internal static byte[] page {
             get {
                 object obj = ResourceManager.GetObject("page", resourceCulture);
@@ -141,35 +101,20 @@ namespace Html2Epub.Properties {
         }
         
         /// <summary>
-        ///   查找类似 body {
-        ///    margin-right: 8pt;
-        ///}
+        ///   查找类似 /*ж ·ејЏеђЌз§°пјљиЂЃз‰›ж ·ејЏ*/
+        ////*ж ·ејЏдЅњиЂ…пјљOxenпј€иЂЃиЂЃиЂЃз‰›пј‰*/
+        ////*ж ·ејЏз‰€жњ¬пјљ4.3*/
+        ////*ж ·ејЏж—Ґжњџпјљ2012-06-09*/
         ///
-        ///
-        ///a.note {
-        ///    vertical-align: super;
-        ///    line-height: 0.1;
-        ///    font-size: 0.7em;
-        ///}
-        ///
-        ///p {
-        ///    margin: 0px;
-        ///    text-indent: 1.5em;
-        ///    text-align: justify;
-        ///}
-        ///
-        ///p.bold {
-        ///	font-weight: bold;
-        ///}
-        ///
-        ///p.italic {
-        ///	font-style: italic;
-        ///}
-        ///
-        ///p.bolditalic {
-        ///	font-weight: bold;
-        ///	font-style: italic;
-        ///} 的本地化字符串。
+        ////*в†“в†“иЂЃз‰›е­—дЅ“ж ·ејЏ2.2 2012-04-20в†“в†“*/
+        ////*в†“в†“ж¬ўиїЋйќће•†дёљжЂ§дЅїз”ЁпјЊдЅ†иЇ·жіЁжЋ&quot;иЂЃз‰›е­—дЅ“ж ·ејЏ&quot;пј›е•†дёљдЅїз”ЁиЇ·дёЋиЂЃз‰›иЃ”зі»в†“в†“*/
+        ///@font-face {
+        ///	font-family:&quot;zw&quot;;
+        ///	src:url(../fonts/zw.ttf),
+        ///	url(res:///opt/sony/ebook/FONT/zw.ttf),
+        ///	url(res:///Data/FONT/zw.ttf),
+        ///	url(res:///opt/sony/ebook/FONT/tt0011m_.ttf),
+        ///	url(res:///ebook/fonts/../../mnt/s [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string style {
             get {

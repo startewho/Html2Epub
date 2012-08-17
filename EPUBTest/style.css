@@ -1,29 +1,923 @@
-body {
-    margin-right: 8pt;
+/*样式名称：老牛样式*/
+/*样式作者：Oxen（老老老牛）*/
+/*样式版本：4.3*/
+/*样式日期：2012-06-09*/
+
+/*↓↓老牛字体样式2.2 2012-04-20↓↓*/
+/*↓↓欢迎非商业性使用，但请注明"老牛字体样式"；商业使用请与老牛联系↓↓*/
+@font-face {
+	font-family:"zw";
+	src:url(../fonts/zw.ttf),
+	url(res:///opt/sony/ebook/FONT/zw.ttf),
+	url(res:///Data/FONT/zw.ttf),
+	url(res:///opt/sony/ebook/FONT/tt0011m_.ttf),
+	url(res:///ebook/fonts/../../mnt/sdcard/fonts/zw.ttf),
+	url(res:///ebook/fonts/../../mnt/extsd/fonts/zw.ttf),
+	url(res:///ebook/fonts/zw.ttf),
+	url(res:///ebook/fonts/DroidSansFallback.ttf),
+	url(res:///fonts/ttf/zw.ttf),
+	url(res:///../../media/mmcblk0p1/fonts/zw.ttf),
+	url(res:///DK_System/system/font/zw.ttf),
+	url(res:///abook/fonts/zw.ttf),
+	url(res:///system/fonts/zw.ttf),
+	url(res:///system/media/sdcard/fonts/zw.ttf),
+	url(res:///media/fonts/zw.ttf),
+	url(res:///sdcard/fonts/zw.ttf),
+	url(res:///system/fonts/DroidSansFallback.ttf),
+	url(res:///mnt/MOVIFAT/font/zw.ttf),
+	url(res:///media/flash/fonts/zw.ttf),
+	url(res:///media/sd/fonts/zw.ttf),
+	url(res:///opt/onyx/arm/lib/fonts/AdobeHeitiStd-Regular.otf),
+	url(res:///../../fonts/zw.ttf),
+	url(res:///../fonts/zw.ttf);
+}
+@font-face {
+	font-family:"fs";
+	src:url(../fonts/fs.ttf),
+	url(res:///opt/sony/ebook/FONT/fs.ttf),
+	url(res:///Data/FONT/fs.ttf),
+	url(res:///opt/sony/ebook/FONT/tt0011m_.ttf),
+	url(res:///ebook/fonts/../../mnt/sdcard/fonts/fs.ttf),
+	url(res:///ebook/fonts/../../mnt/extsd/fonts/fs.ttf),
+	url(res:///ebook/fonts/fs.ttf),
+	url(res:///ebook/fonts/DroidSansFallback.ttf),
+	url(res:///fonts/ttf/fs.ttf),
+	url(res:///../../media/mmcblk0p1/fonts/fs.ttf),
+	url(res:///DK_System/system/font/fs.ttf),
+	url(res:///abook/fonts/fs.ttf),
+	url(res:///system/fonts/fs.ttf),
+	url(res:///system/media/sdcard/fonts/fs.ttf),
+	url(res:///media/fonts/fs.ttf),
+	url(res:///sdcard/fonts/fs.ttf),
+	url(res:///system/fonts/DroidSansFallback.ttf),
+	url(res:///mnt/MOVIFAT/font/fs.ttf),
+	url(res:///media/flash/fonts/fs.ttf),
+	url(res:///media/sd/fonts/fs.ttf),
+	url(res:///opt/onyx/arm/lib/fonts/AdobeHeitiStd-Regular.otf),
+	url(res:///../../fonts/fs.ttf),
+	url(res:///../fonts/fs.ttf);
+}
+@font-face {
+	font-family:"kt";
+	src:url(../fonts/kt.ttf),
+	url(res:///opt/sony/ebook/FONT/kt.ttf),
+	url(res:///Data/FONT/kt.ttf),
+	url(res:///opt/sony/ebook/FONT/tt0011m_.ttf),
+	url(res:///ebook/fonts/../../mnt/sdcard/fonts/kt.ttf),
+	url(res:///ebook/fonts/../../mnt/extsd/fonts/kt.ttf),
+	url(res:///ebook/fonts/kt.ttf),
+	url(res:///ebook/fonts/DroidSansFallback.ttf),
+	url(res:///fonts/ttf/kt.ttf),
+	url(res:///../../media/mmcblk0p1/fonts/kt.ttf),
+	url(res:///DK_System/system/font/kt.ttf),
+	url(res:///abook/fonts/kt.ttf),
+	url(res:///system/fonts/kt.ttf),
+	url(res:///system/media/sdcard/fonts/kt.ttf),
+	url(res:///media/fonts/kt.ttf),
+	url(res:///sdcard/fonts/kt.ttf),
+	url(res:///system/fonts/DroidSansFallback.ttf),
+	url(res:///mnt/MOVIFAT/font/kt.ttf),
+	url(res:///media/flash/fonts/kt.ttf),
+	url(res:///media/sd/fonts/kt.ttf),
+	url(res:///opt/onyx/arm/lib/fonts/AdobeHeitiStd-Regular.otf),
+	url(res:///../../fonts/kt.ttf),
+	url(res:///../fonts/kt.ttf);
+}
+@font-face {
+	font-family:"ktpy";
+	src:url(../fonts/ktpy.ttf),
+	url(res:///opt/sony/ebook/FONT/ktpy.ttf),
+	url(res:///Data/FONT/ktpy.ttf),
+	url(res:///opt/sony/ebook/FONT/tt0011m_.ttf),
+	url(res:///ebook/fonts/../../mnt/sdcard/fonts/ktpy.ttf),
+	url(res:///ebook/fonts/../../mnt/extsd/fonts/ktpy.ttf),
+	url(res:///ebook/fonts/ktpy.ttf),
+	url(res:///ebook/fonts/DroidSansFallback.ttf),
+	url(res:///fonts/ttf/ktpy.ttf),
+	url(res:///../../media/mmcblk0p1/fonts/ktpy.ttf),
+	url(res:///DK_System/system/font/ktpy.ttf),
+	url(res:///abook/fonts/ktpy.ttf),
+	url(res:///system/fonts/ktpy.ttf),
+	url(res:///system/media/sdcard/fonts/ktpy.ttf),
+	url(res:///media/fonts/ktpy.ttf),
+	url(res:///sdcard/fonts/ktpy.ttf),
+	url(res:///system/fonts/DroidSansFallback.ttf),
+	url(res:///mnt/MOVIFAT/font/ktpy.ttf),
+	url(res:///media/flash/fonts/ktpy.ttf),
+	url(res:///media/sd/fonts/ktpy.ttf),
+	url(res:///opt/onyx/arm/lib/fonts/AdobeHeitiStd-Regular.otf),
+	url(res:///../../fonts/ktpy.ttf),
+	url(res:///../fonts/ktpy.ttf);
+}
+@font-face {
+	font-family:"ht";
+	src:url(../fonts/ht.ttf),
+	url(res:///opt/sony/ebook/FONT/ht.ttf),
+	url(res:///Data/FONT/ht.ttf),
+	url(res:///opt/sony/ebook/FONT/tt0011m_.ttf),
+	url(res:///ebook/fonts/../../mnt/sdcard/fonts/ht.ttf),
+	url(res:///ebook/fonts/../../mnt/extsd/fonts/ht.ttf),
+	url(res:///ebook/fonts/ht.ttf),
+	url(res:///ebook/fonts/DroidSansFallback.ttf),
+	url(res:///fonts/ttf/ht.ttf),
+	url(res:///../../media/mmcblk0p1/fonts/ht.ttf),
+	url(res:///DK_System/system/font/ht.ttf),
+	url(res:///abook/fonts/ht.ttf),
+	url(res:///system/fonts/ht.ttf),
+	url(res:///system/media/sdcard/fonts/ht.ttf),
+	url(res:///media/fonts/ht.ttf),
+	url(res:///sdcard/fonts/ht.ttf),
+	url(res:///system/fonts/DroidSansFallback.ttf),
+	url(res:///mnt/MOVIFAT/font/ht.ttf),
+	url(res:///media/flash/fonts/ht.ttf),
+	url(res:///media/sd/fonts/ht.ttf),
+	url(res:///opt/onyx/arm/lib/fonts/AdobeHeitiStd-Regular.otf),
+	url(res:///../../fonts/ht.ttf),
+	url(res:///../fonts/ht.ttf);
+}
+@font-face {
+	font-family:"h1";
+	src:url(../fonts/h1.ttf),
+	url(res:///opt/sony/ebook/FONT/h1.ttf),
+	url(res:///Data/FONT/h1.ttf),
+	url(res:///opt/sony/ebook/FONT/tt0011m_.ttf),
+	url(res:///ebook/fonts/../../mnt/sdcard/fonts/h1.ttf),
+	url(res:///ebook/fonts/../../mnt/extsd/fonts/h1.ttf),
+	url(res:///ebook/fonts/h1.ttf),
+	url(res:///ebook/fonts/DroidSansFallback.ttf),
+	url(res:///fonts/ttf/h1.ttf),
+	url(res:///../../media/mmcblk0p1/fonts/h1.ttf),
+	url(res:///DK_System/system/font/h1.ttf),
+	url(res:///abook/fonts/h1.ttf),
+	url(res:///system/fonts/h1.ttf),
+	url(res:///system/media/sdcard/fonts/h1.ttf),
+	url(res:///media/fonts/h1.ttf),
+	url(res:///sdcard/fonts/h1.ttf),
+	url(res:///system/fonts/DroidSansFallback.ttf),
+	url(res:///mnt/MOVIFAT/font/h1.ttf),
+	url(res:///media/flash/fonts/h1.ttf),
+	url(res:///media/sd/fonts/h1.ttf),
+	url(res:///opt/onyx/arm/lib/fonts/AdobeHeitiStd-Regular.otf),
+	url(res:///../../fonts/h1.ttf),
+	url(res:///../fonts/h1.ttf);
+}
+@font-face {
+	font-family:"h2";
+	src:url(../fonts/h2.ttf),
+	url(res:///opt/sony/ebook/FONT/h2.ttf),
+	url(res:///Data/FONT/h2.ttf),
+	url(res:///opt/sony/ebook/FONT/tt0011m_.ttf),
+	url(res:///ebook/fonts/../../mnt/sdcard/fonts/h2.ttf),
+	url(res:///ebook/fonts/../../mnt/extsd/fonts/h2.ttf),
+	url(res:///ebook/fonts/h2.ttf),
+	url(res:///ebook/fonts/DroidSansFallback.ttf),
+	url(res:///fonts/ttf/h2.ttf),
+	url(res:///../../media/mmcblk0p1/fonts/h2.ttf),
+	url(res:///DK_System/system/font/h2.ttf),
+	url(res:///abook/fonts/h2.ttf),
+	url(res:///system/fonts/h2.ttf),
+	url(res:///system/media/sdcard/fonts/h2.ttf),
+	url(res:///media/fonts/h2.ttf),
+	url(res:///sdcard/fonts/h2.ttf),
+	url(res:///system/fonts/DroidSansFallback.ttf),
+	url(res:///mnt/MOVIFAT/font/h2.ttf),
+	url(res:///media/flash/fonts/h2.ttf),
+	url(res:///media/sd/fonts/h2.ttf),
+	url(res:///opt/onyx/arm/lib/fonts/AdobeHeitiStd-Regular.otf),
+	url(res:///../../fonts/h2.ttf),
+	url(res:///../fonts/h2.ttf);
+}
+@font-face {
+	font-family:"h3";
+	src:url(../fonts/h3.ttf),
+	url(res:///opt/sony/ebook/FONT/h3.ttf),
+	url(res:///Data/FONT/h3.ttf),
+	url(res:///opt/sony/ebook/FONT/tt0011m_.ttf),
+	url(res:///ebook/fonts/../../mnt/sdcard/fonts/h3.ttf),
+	url(res:///ebook/fonts/../../mnt/extsd/fonts/h3.ttf),
+	url(res:///ebook/fonts/h3.ttf),
+	url(res:///ebook/fonts/DroidSansFallback.ttf),
+	url(res:///fonts/ttf/h3.ttf),
+	url(res:///../../media/mmcblk0p1/fonts/h3.ttf),
+	url(res:///DK_System/system/font/h3.ttf),
+	url(res:///abook/fonts/h3.ttf),
+	url(res:///system/fonts/h3.ttf),
+	url(res:///system/media/sdcard/fonts/h3.ttf),
+	url(res:///media/fonts/h3.ttf),
+	url(res:///sdcard/fonts/h3.ttf),
+	url(res:///system/fonts/DroidSansFallback.ttf),
+	url(res:///mnt/MOVIFAT/font/h3.ttf),
+	url(res:///media/flash/fonts/h3.ttf),
+	url(res:///media/sd/fonts/h3.ttf),
+	url(res:///opt/onyx/arm/lib/fonts/AdobeHeitiStd-Regular.otf),
+	url(res:///../../fonts/h3.ttf),
+	url(res:///../fonts/h3.ttf);
+}
+/*↑↑老牛字体样式2.2↑↑*/
+/*↑↑欢迎非商业性使用，但请注明"老牛字体样式"；商业使用请与老牛联系↑↑*/
+
+@page {
+	margin-top: 3px;
+	margin-bottom: 0px;
+	margin-left: 3px;
+	margin-right: 3px;
 }
 
-
-a.note {
-    vertical-align: super;
-    line-height: 0.1;
-    font-size: 0.7em;
+body {
+	padding: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 10px;
+	margin-right: 10px;
+	line-height:130%;
+	text-align: justify;
+	font-family:"宋体","zw",serif;
+	font-size:97%;
+}
+div {
+	margin:0px;
+	padding:0px;
+	line-height:130%;
+	text-align: justify;
+	font-family:"宋体","zw",serif;
 }
 
 p {
-    margin: 0px;
-    text-indent: 1.5em;
-    text-align: justify;
+	text-align: justify;
+	text-indent: 0em!important;
+	line-height:130%;
+	font-family:inherit;
+	margin-top:0%;
+	margin-bottom:0%;
+	/*margin-bottom:-0.9em;*/
 }
 
-p.bold {
-	font-weight: bold;
+a{
+text-decoration:none;
+}
+.center {
+	text-align: center;
+	margin-left: 0%;
+	margin-right: 0%;
+}
+.left {
+	text-align: center;
+	margin-left: 0%;
+	margin-right: 0%;
+}
+.right {
+	text-align: right;
+	margin-left: 0%;
+	margin-right: 0%;
 }
 
-p.italic {
-	font-style: italic;
+/*封面*/
+.cover {
+	/*width:100%;*/
+	height:100%;
+	text-align:center;
+	padding:0px;
+}
+/*扉页*/
+.titlepages {
+	margin-left:38.2%;
+	border-style: none none none none;
+	border-width: 0px 0px 0px 0px;
+	border-color: deeppink deeppink;
+	font-family:"黑体","ht","zw",sans-serif;
+	text-align: justify;
+	line-height:100%;
+}
+.bookname {
+	color:red;
+	/*color:deeppink;*/
+	margin-top:37%;
+	border-style: none double solid solid;
+	border-width: 0px 5px 1px 40px;
+	border-color: mediumvioletred;
+	border-left-color: mediumvioletred;
+	/*page-break-before:always;*/
+	font-weight:bold;
+	font-size:xx-large;
+	font-family:"黑体","h1","zw",sans-serif;
 }
 
-p.bolditalic {
-	font-weight: bold;
-	font-style: italic;
+.bookauthor {
+	margin-top:2em;
+	font-family:"楷体","kt","zw",serif;
 }
+.booktranslator,.booltranslator {
+	font-family:"楷体","kt","zw",serif;
+}
+.bookpub {
+	font-family:"黑体","ht","zw",sans-serif;
+}
+
+.creator,.titlepage {
+	font-family:"黑体","ht","zw",sans-serif;
+	text-align: justify;
+	font-size:75%;
+}
+
+.maker,.titlepagemaker {
+	font-family:"黑体","ht","zw",sans-serif;
+	font-size:61.8%;
+}
+
+hr.titlepage {
+	height: 50px;
+	width:100%;
+	border-style: none none dotted none;
+	border-width: 0px 0px 1px 0px;
+	border-color: blue yellow;
+}
+
+/*前言*/
+.preface {
+	font-family:"仿宋","fs","zw",serif;
+}
+
+/*目录页*/
+.contents {
+	margin-left:20%;
+	padding:0px;
+	line-height:130%;
+	text-align: justify;
+	font-family:"仿宋","fs","zw",serif;
+}
+
+/*目录页部篇标题*/
+.c1,.part {
+	margin-top:0.5em;
+	margin-left:-1.5em;
+	/*color:palevioletred;*/
+	color: mediumvioletred;
+	border-style: none double double solid;
+	border-width: 0px 5px 2px 20px;
+	border-color: mediumvioletred;
+	border-left-color: mediumvioletred;
+	font-weight:bold;
+	font-size:medium;
+	font-family:"黑体","ht","zw",sans-serif;
+	list-style-type:none;
+}
+
+/*目录页部章标题*/
+.c2,.chapter {
+	margin-top:0.5em;
+	margin-left:-1em;
+	/*color:palevioletred;*/
+	color: deeppink;
+	border-style: none double none solid;
+	border-width: 0px 2px 0px 10px;
+	border-color: deeppink;
+	border-left-color: deeppink;
+	font-weight:bold;
+	font-size:medium;
+	font-family:"宋体","zw",serif;
+	list-style-type:none;
+}
+/*目录页节标题*/
+.c3 {
+	font-size:93%;
+	font-family:"仿宋","fs","zw",serif;
+	list-style-type:none;
+}
+/*目录页其他层次标题*/
+.c4 {
+	font-size:90%;
+	font-family:"宋体","zw",serif;
+	list-style-type:none;
+}
+.c5,.c6,.c7,.c8,.c9 {
+	font-size:90%;
+	font-family:"楷体","kt","zw",serif;
+	list-style-type:none;
+}
+
+/*目录页其他元素*/
+li.c0,.cline {
+	list-style-type:none;
+	/*color:green;*/
+}
+
+/*目录页文章作者*/
+.contentauthor {
+	padding-left: 20%;
+	text-align: right;
+	font-family:"楷体","kt","zw",serif;
+}
+/*目录页标题换行*/
+.cr {
+	display:block;
+}
+/*版权页*/
+.copyright {
+	margin-top:50px;
+	margin-left:20%;
+	padding:0px;
+	/*line-height:100%;*/
+	text-align: justify;
+	font-family:"黑体","ht","zw",sans-serif;
+	font-size:9pt;
+	list-style-type:none;
+}
+.copyrighth {
+	margin-top:10px;
+	margin-bottom:0px;
+	text-align: justify;
+	font-family:"宋体","zw",serif;
+	font-size:12pt;
+	list-style-type:none;
+}
+.copyrightp {
+	margin-top:0px;
+	margin-bottom:0px;
+	text-align: justify;
+	font-family:"黑体","ht","zw",sans-serif;
+	font-size:9pt;
+	list-style-type:none;
+}
+.copyrightnotice {
+	margin-top:0px;
+	margin-bottom:0px;
+	text-align: justify;
+	font-family:"楷体","kt","zw",serif;
+	font-size:6.18pt;
+	list-style-type:none;
+}
+
+/*标题*/
+h1 {
+	/*color:red;*/
+	color:deeppink;
+	margin-top:37%;
+	/*margin-top:61.8%;*/
+	margin-left:38.2%;
+	line-height:100%;
+	text-align: justify;
+	border-style: none double solid solid;
+	border-width: 0px 5px 3px 20px;
+	border-color: mediumvioletred;
+	border-left-color: mediumvioletred;
+	page-break-before:always;
+	font-weight:bold;
+	font-size:xx-large;
+	font-family:"黑体","h1","zw",sans-serif;
+}
+
+h2 {
+	color:pink;
+	margin-top:0;
+	line-height:100%;
+	text-align: justify;
+	border-style: none double none solid;
+	border-width: 0px 5px 0px 20px;
+	/*border-color: blue;*/
+	/*border-left-color: blue;*/
+	/*background-color: gray;*/
+	border-color: mediumvioletred;
+	border-left-color:mediumvioletred;
+	background-color: palevioletred;
+	padding: 100px 5px 5px 5px;
+	page-break-before:always;
+	font-weight:bold;
+	font-size:x-large;
+	font-family:"方正大标宋简体","大标宋","h2","zw",serif;
+}
+
+/*副标题*/
+.h2sub {
+	/*color:orange;*/
+	color:palevioletred;
+	margin-top:-20;
+	line-height:100%;
+	text-align: justify;
+	border-style: none double none solid;
+	border-width: 0px 5px 0px 20px;
+	/*border-color: blue;*/
+	/*border-left-color: blue;*/
+	border-color: mediumvioletred;
+	border-left-color: mediumvioletred;
+	font-weight:bold;
+	font-size:medium;
+	font-family:"黑体","ht","zw",sans-serif;
+}
+
+h3 {
+	/*color:fuchsia;*/
+	/*color:mediumvioletred;*/
+	color:indigo;
+	line-height:130%;
+	text-align: justify;
+	font-weight:bold;
+	font-size:large;
+	font-family:"仿宋","h3","fs","zw",sans-serif;
+	margin-top:50;
+	/*margin-bottom:-0.9em;*/
+}
+h4 {
+/*	color:gray;*/
+	line-height:130%;
+	text-align: justify;
+	font-weight:bold;
+	font-size:medium;
+	font-family:"黑体","ht","zw",sans-serif;
+	margin-top:0.5em;
+	margin-bottom:0.5em;
+	/*margin-bottom:-0.8em;*/
+}
+h5 {
+	line-height:130%;
+	text-align: justify;
+	font-weight:bold;
+	font-size:small;
+	font-family:"楷体","kt","zw",sans-serif;
+	margin-top:0.5em;
+	margin-bottom:0.5em;
+	/*margin-bottom:-0.9em;*/
+}
+h6 {
+	line-height:130%;
+	text-align: justify;
+	font-weight:bold;
+	font-size:x-small;
+	margin-top:0.5em;
+	margin-bottom:0.5em;
+	/*margin-bottom:-0.9em;*/
+}
+/*作者*/
+.author {
+	/*color:palevioletred;*/
+	color: mediumvioletred;
+	/*margin-top:-26;*/
+	line-height:100%;
+	text-align: justify;
+	border-style: none double none solid;
+	border-width: 0px 5px 0px 20px;
+	/*border-color: blue;*/
+	/*border-left-color: blue;*/
+	border-color: mediumvioletred;
+	border-left-color: mediumvioletred;
+	font-weight:bold;
+	font-size:medium;
+	font-family:"楷体","kt","zw",sans-serif;
+}
+/*标题2作者*/
+.h2author {
+	font-family:"楷体","kt","zw",sans-serif;
+	color:white;
+	font-size:10.5pt;
+	display:block;
+}
+/*标题3作者*/
+.h3author {
+	font-family:"楷体","kt","zw",sans-serif;
+	/*color:white;*/
+	font-size:10.5pt;
+	/*margin-bottom:1.5em;*/
+	display:block;
+}
+/*篇标题块*/
+.h1note {
+	margin-top:5pt;
+	margin-bottom:20pt;
+	margin-left:38.2%;
+	border-style: none none none solid;
+	border-width: 0px 0px 0px 10px;
+	border-color: blue yellow;
+	font-family:"黑体","ht","zw",sans-serif;
+	font-size:90%;
+}
+/*编者按*/
+.editornote {
+	/*margin-top:50pt;
+	margin-bottom:20pt;*/
+	margin-left:4em;
+	border-style: none none none solid;
+	border-width: 0px 0px 0px 10px;
+	border-color: blue yellow;
+	font-family:"楷体","kt","zw",sans-serif;
+	font-size:90%;
+	padding: 5px 5px 5px 5px;
+	line-height:125%;
+	margin-bottom:3pt;
+	/*margin-bottom:-14pt;*/
+}
+/*标题2注*/
+.h2note {
+	/*margin-top:50pt;
+	margin-bottom:20pt;*/
+	margin-left:4em;
+	border-style: none none none solid;
+	border-width: 0px 0px 0px 10px;
+	border-color: blue yellow;
+	font-family:"黑体","ht","zw",sans-serif;
+	font-size:90%;
+	padding: 5px 5px 5px 5px;
+	line-height:125%;
+	margin-top:0.25em;
+	margin-bottom:0.25em;
+	/*margin-bottom:-14pt;*/
+}
+/*标题3注*/
+.h3note {
+	/*margin-top:50pt;
+	margin-bottom:20pt;*/
+	margin-left:4em;
+	border-style: none none none solid;
+	border-width: 0px 0px 0px 10px;
+	border-color: blue yellow;
+	font-family:"仿宋","fs","zw",sans-serif;
+	font-size:90%;
+	padding: 5px 5px 5px 5px;
+	margin-top:0.25em;
+	margin-bottom:0.25em;
+	/*margin-bottom:-14pt;*/
+}
+/*称呼*/
+.call {
+	margin-left: 0em;
+	font-family:"仿宋","fs","zw",serif;
+}	
+/*插文*/
+.box {
+	margin-left: 1em;
+	margin-right: 1em;
+	/*border-style: none solid none solid;
+	border-width: 0px 1px 0px 5px;
+	border-color: #CCCC00;
+	text-align: justify;*/
+	font-family: "仿宋","fs","zw",sans-serif;
+	font-size:90%;
+	color: darkblue;
+}	
+/*插文标题*/
+.boxtitle {
+	margin-left: 1em;
+	margin-right: 1em;
+	border-style: none none solid none;
+	border-width: 0px 0px 2px 5px;
+	border-color: #CCCC00;
+	/*text-align: justify;*/
+	font-family:"黑体","h1","zw",sans-serif;
+}
+/*引用*/
+.quote {
+	margin-left: 2em;
+	margin-right: 1em;
+	/*border-style: none solid none solid;
+	border-width: 0px 1px 0px 5px;
+	border-color: #CCCC00;
+	text-align: justify;*/
+	font-family:"楷体","kt","zw",serif;
+}
+/*引用标题*/
+.quotetitle {
+	margin-left: 2em;
+	margin-right: 1em;
+	border-style: none none solid none;
+	border-width: 0px 0px 2px 0px;
+	border-color: #CCCC00;
+	text-align: justify;
+	font-family:"黑体","ht","zw",sans-serif;
+}
+/*原文引用－方正拼音楷体*/
+.quoteoriginal,.quotepinyin {
+	margin-left: 2em;
+	margin-right: 1em;
+	/*border-style: none solid none solid;
+	border-width: 0px 1px 0px 5px;
+	border-color: #CCCC00;
+	text-align: justify;*/
+	font-size:large;
+	font-family:"方正楷体拼音字库01","ktpy","kt","zw",serif;
+}
+.quotefrom {
+	margin-left: 2em;
+	margin-right: 1em;
+	/*border-style: none solid none solid;
+	border-width: 0px 1px 0px 5px;
+	border-color: #CCCC00;*/
+	text-align: right;
+	font-family:"楷体","kt","zw",serif;
+}
+.say1 {
+	/*margin-left: 2em;
+	margin-right: 1em;
+	border-style: none solid none solid;
+	border-width: 0px 1px 0px 5px;
+	border-color: #CCCC00;
+	text-align: justify;*/
+	color:blue;
+	font-family:"楷体","kt","zw",sans-serif;
+}
+.say2 {
+	/*margin-left: 2em;
+	margin-right: 1em;
+	border-style: none solid none solid;
+	border-width: 0px 1px 0px 5px;
+	border-color: #CCCC00;
+	text-align: justify;*/
+	color:darkblue;
+	font-family:"仿宋","fs","zw",serif;
+}
+/*强调*/
+.heavy {
+	font-family:"黑体","ht","zw",sans-serif;
+	color:blue;
+	/*font-weight:bold;*/
+	/*font-size:10.5pt;*/
+}
+/*评论*/
+.review {
+	font-family:"楷体","kt","zw",serif;
+	color: darkblue;
+}	
+/*落款*/
+.signature {
+	padding-left:40%;
+	font-family:"楷体","kt","zw",sans-serif;
+	color:blue;
+}
+/*落款日期*/
+.date {
+	padding-left:40%;
+	font-family:"楷体","kt","zw",serif;
+	color:blue;
+}
+/*原载报刊*/
+.from {
+	font-family:"楷体","kt","zw",serif;
+	color: darkblue;
+}
+/*文尾作者说明*/
+.endauthornote {
+	font-family:"楷体","kt","zw",serif;
+	color: darkblue;
+/*文尾*/
+}.end {
+	font-family:"仿宋","fs","zw",serif;
+	font-size:small;
+	color:dimgray;
+}
+/*注释（脚注尾注）标题*/
+.annotationtitle {
+	margin-top:30pt;
+	font-family:"黑体","ht","zw",sans-serif;
+}
+/*注释*/
+.annotation {
+	font-family:"仿宋","fs","zw",serif;
+	font-size:90%;
+}
+
+/*图片分组（块）*/
+.DivImageFloatNo {
+	width:100%;
+	display:inline-block;
+}
+.DivImage {
+	width:100%;
+	/*display:inline-block;*/
+}
+/*图片*/
+.image {
+	position: relative;
+	z-index:2;
+	width:70%;
+	float:right;
+	/*height:100%;*/
+	margin-left:0.5em;
+	margin-right:0.5em;
+	border-style: solid none none none;
+	border-width: 1px 0px 2px 10px;
+	border-color: lightpink lightpink;
+	text-align:center;
+	padding:0px;
+	font-family:"楷体","kt","zw",sans-serif;
+	font-size:small;
+	color:blue;
+}
+/*图片说明*/
+.imagenote {
+	position: relative;
+	z-index:-1;
+	width:70%;
+	/*float:right;*/
+	margin-top:0em;
+	margin-left:1em;
+	margin-right:1em;
+	margin-bottom:20pt;
+	border-style: solid none none solid;
+	border-width: 2px 0px 0px 10px;
+	border-color: lightpink lightpink;
+	/*background-color: yellow;*/
+	text-align:justify;
+	font-family:"楷体","kt","zw",sans-serif;
+	font-size:small;
+	color:blue;
+	padding: 5px 0px 5px 5px;
+}
+/*图片_作者*/
+.image_author {
+	float:right;
+}
+/*图片－左浮*/
+.image_left {
+	float:left;
+}
+/*图片－右浮*/
+.image_right {
+	float:right;
+}
+/*正文中的分隔线*/
+.divline {
+	text-align: center;
+	color:gray;
+}
+/*一些通用定义*/
+.title {
+  text-align: left;
+}
+.nostyle {
+  list-style-type: none;
+}
+
+.width20{
+	width: 20%;
+}
+.width15{
+	width: 15%;
+}
+.width45{
+	width: 45%;
+}
+.width19{
+	width: 19%;
+}
+.width100{
+	width: 100%;
+}
+/*表格*/
+table{
+	font-family:"仿宋","fs","Times New Roman", Times, serif;
+	font-size:90%;
+	width: 99%;
+	/*border:2px 0px 2px 0px;*/
+	background-color:ivory;
+	vertical-align:center;
+	padding:2px 2px 2px 2px;
+	border-collapse:collapse;
+	border:1px solid #98bf21;
+}
+/*表格：表格标题*/
+.tdtitle{
+	width: 99%;
+	border:0px 0px 2px 0px;
+	colspan:4;
+	text-align:center;
+	font-weight:bold;
+	font-family:Verdana, Geneva, sans-serif,"ht","黑体";
+	font-size:100%;
+	color:darkslategray;
+}
+/*表格：行头*/
+th 
+{
+	font-size:93%;
+	/*text-align:left;*/
+	padding-top:5px;
+	padding-bottom:4px;
+	background-color:yellowgreen;
+	color:ivory;
+	font-family:"楷体",Arial, Helvetica, sans-serif,"kt";
+}
+/*表格：列，行头*/
+
+tdh 
+{
+	font-size:1em;
+	border:1px solid #98bf21;
+	padding:2px;
+}
+th 
+{
+	font-size:1em;
+	border:1px solid #98bf21;
+	padding:2px;
+}
+
+
+/*表格：间隔行*/
+tr.alt 
+{
+	color:#000000;
+	background-color:#EAF2D3;
+}
+td 
+{
+	color:#000000;
+	background-color:#EAF2D3;
+}
+
