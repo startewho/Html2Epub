@@ -13,7 +13,7 @@ namespace Html2Epub
         public  void AdjustNook(string path)
          {
              var dirinfo = new DirectoryInfo(path);
-             Parallel.ForEach(GetFiles(path, ".html;.htm;xhtml"), fileInfo => AddCss(fileInfo));
+             Parallel.ForEach(GetFiles(path, ".html;.htm;.xhtml"), fileInfo => AddCss(fileInfo));
              Parallel.ForEach(dirinfo.GetDirectories(), dir =>AdjustNook(dir.FullName) );
          }
         

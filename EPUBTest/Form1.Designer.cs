@@ -1,4 +1,4 @@
-﻿namespace EPUBTest
+﻿namespace Html2Epub
 {
     partial class Form1
     {

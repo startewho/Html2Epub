@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Collections.Generic;
-//第三方的.dll
-using Html2Epub;
-using WizKMControlsLib;
-using EPubDocument = Epub.Document;
-using NavPoint = Epub.NavPoint;
-
+using Epub;
 using WizKMCoreLib;
-namespace EPUBTest
+//第三方的.dll
+
+namespace Html2Epub
 {
     public partial class Form1 : Form
     {
@@ -25,11 +22,11 @@ namespace EPUBTest
         }
 
 
-        private int _order = 0;
-        private int _playorder = 0;
+        private int _order;
+        private int _playorder;
         private string _tempDirectory;
         private string _source;
-        private Dictionary<string, string> dic=new Dictionary<string, string>(35);
+        private Dictionary<string, string> dic;
         DealHtml _dealhtml = new DealHtml( );
 
 
@@ -48,9 +45,9 @@ namespace EPUBTest
         private string HtmlList(string path)
         {
             var result = new StringBuilder(25);
-            string temp = File.ReadAllText(Path.Combine(Application.StartupPath,"page.html"));
+            string temp = File.ReadAllText(Path.Combine(Application.StartupPath,"page.xhtml"));
 
-            var fileinfolist = GetFiles(path, ".html;xhtml;htm");
+            var fileinfolist = GetFiles(path, ".html;.xhtml;.htm");
             result.Append("<h1>Content</h1>\r\n");
             foreach (var fileInfo in fileinfolist)
             {
@@ -64,7 +61,7 @@ namespace EPUBTest
         }
 
         
-        private void CreateNavMap(string path,NavPoint nav,EPubDocument epub)
+        private void CreateNavMap(string path,NavPoint nav,Document epub)
         {
             var dir =new DirectoryInfo(path);
 
@@ -72,9 +69,9 @@ namespace EPUBTest
             {
                 if (!folder.Name.Contains(tbFolderRule.Text))
                 {
-                    var navin = nav.AddNavPoint(folder.Name, folder.Name + ".html", _playorder++);
+                    var navin = nav.AddNavPoint(folder.Name, folder.Name + ".xhtml", _playorder++);
                     CreateNavMap(folder.FullName, navin, epub);
-                    epub.AddXhtmlData(folder.Name + ".html", HtmlList(folder.FullName));
+                    epub.AddXhtmlData(folder.Name + ".xhtml", HtmlList(folder.FullName));
                    
                 }
                 else
@@ -110,13 +107,10 @@ namespace EPUBTest
 
         private string GetTempDirectory()
         {
-            if (String.IsNullOrEmpty(_tempDirectory))
-            {
+            
                 _tempDirectory = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
                 Directory.CreateDirectory(_tempDirectory);
-            }
-
-            return _tempDirectory;
+                return _tempDirectory;
         }
 
 
@@ -197,7 +191,7 @@ namespace EPUBTest
                                                  {
                                                      var objDoc = documents[i];
                                                      var name = objDoc.Title;
-                                                     var filename = path + MakeValidFileName(name) + ".html";
+                                                     var filename = path + MakeValidFileName(name) + ".xhtml";
                                                      objDoc.SaveToHtml(filename, flags);
                                                      //
                                                  }
@@ -221,7 +215,10 @@ namespace EPUBTest
 
         private void tbGenerateEpub_Click(object sender, EventArgs e)
         {
-            var epub = new EPubDocument();
+            var epub = new Document();
+            _order = 0;
+            _playorder = 0;
+            dic=new Dictionary<string, string>(35);
             _tempDirectory = GetTempDirectory();
             List<WizFolder> _list = GetWizFolderList();
 
@@ -241,7 +238,7 @@ namespace EPUBTest
 
 
             _dealhtml.AdjustNook(_source);
-
+           
             //Add metadata
             epub.AddAuthor(textboxAuthor.Text);
             epub.AddTitle(textboxTitle.Text);
@@ -252,11 +249,11 @@ namespace EPUBTest
             if (picCover.Image != null)
             {
                 epub.AddImageFile(picCover.ImageLocation, "Cover.jpg");
-                epub.AddNavPoint("Cover", "cover.html", _playorder++);
-                epub.AddXhtmlData("cover.html", "<img src='Cover.jpg'/>");
+                epub.AddNavPoint("Cover", "cover.xhtml", _playorder++);
+                epub.AddXhtmlData("cover.xhtml", "<img src='Cover.jpg'/>");
             }
-            var root = epub.AddNavPoint(cmBFolder.Text, "root.html", _playorder++);
-            epub.AddXhtmlData("root.html", HtmlList(_source));
+            var root = epub.AddNavPoint(cmBFolder.Text, "root.xhtml", _playorder++);
+            epub.AddXhtmlData("root.xhtml", HtmlList(_source));
             
             CreateNavMap(_source,root,epub);
           
