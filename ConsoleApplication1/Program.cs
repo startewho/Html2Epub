@@ -15,12 +15,14 @@ namespace ConsoleApplication1
             _wizdb.Open("");
             Action<WizFolder> ac = Program.Counter;
 
-            Parallel.ForEach(_wizdb.Folders, ac(_wizdb.Folders[0]));
-         
+          //  dynamic forEach = Parallel.ForEach(_wizdb.Folders, ac(dynamic file));
+
             Console.ReadKey();
         }
 
-       static void Counter(WizFolder i)
+        
+
+        static void Counter(WizFolder i)
        {
            Console.WriteLine("i={0},TaskName={1},ThreadName={2}", i, Task.CurrentId, Thread.CurrentThread.ManagedThreadId);
        }

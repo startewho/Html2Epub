@@ -141,7 +141,7 @@
     <value>False</value>
   </data>
   <data name="tbFolder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 330</value>
+    <value>20, 322</value>
   </data>
   <data name="tbFolder.Size" type="System.Drawing.Size, System.Drawing">
     <value>459, 21</value>

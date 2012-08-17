@@ -209,9 +209,6 @@
   <data name="&gt;&gt;cmBFolder.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="rBSelectedFolder.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
   <data name="cmBFolder.Size" type="System.Drawing.Size, System.Drawing">
     <value>413, 20</value>
   </data>
@@ -275,6 +272,9 @@
   <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
     <value>groupBox1</value>
   </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>Form1</value>
+  </data>
   <data name="&gt;&gt;rBSelectedDocs.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
@@ -287,8 +287,8 @@
   <data name="tbFolder.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
   </data>
-  <data name="&gt;&gt;rBRootFolder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;cmBFolder.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;lbFolderRule.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -341,8 +341,8 @@
   <data name="&gt;&gt;picCover.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="rBRootFolder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 16</value>
+  <data name="lbFolderRule.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;rBSelectedDocs.Name" xml:space="preserve">
     <value>rBSelectedDocs</value>
@@ -398,17 +398,20 @@
   <data name="lbFolder.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 23</value>
   </data>
-  <data name="&gt;&gt;cmBFolder.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;lbImageRule.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="panel1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="picCover.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 194</value>
+  </data>
   <data name="tbFolderRule.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 21</value>
+  </data>
+  <data name="&gt;&gt;rBRootFolder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="checkBoxFonts.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -431,8 +434,8 @@
   <data name="lbSubject.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 12</value>
   </data>
-  <data name="picCover.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 194</value>
+  <data name="tbImageRule.Text" xml:space="preserve">
+    <value>.jpg;.png;.gif</value>
   </data>
   <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -467,17 +470,11 @@
   <data name="groupBox1.Text" xml:space="preserve">
     <value>MetaData</value>
   </data>
-  <data name="&gt;&gt;lbTitle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="checkBoxFonts.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="tbSubject.Location" type="System.Drawing.Point, System.Drawing">
     <value>66, 108</value>
-  </data>
-  <data name="&gt;&gt;lbAuthor.Parent" xml:space="preserve">
-    <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;lbTitle.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -497,6 +494,9 @@
   <data name="tbFolderRule.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
+  <data name="&gt;&gt;tbFolderRule.Name" xml:space="preserve">
+    <value>tbFolderRule</value>
+  </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>473, 46</value>
   </data>
@@ -513,11 +513,8 @@
   <data name="tbFolder.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 276</value>
   </data>
-  <data name="checkBoxFonts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 372</value>
-  </data>
-  <data name="tbImageRule.Text" xml:space="preserve">
-    <value>.jpg;.png;.gif</value>
+  <data name="rBSelectedFolder.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
   </data>
   <data name="tbFolderRule.Text" xml:space="preserve">
     <value>_files</value>
@@ -525,11 +522,11 @@
   <data name="tbFolder.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="checkBoxFonts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 372</value>
+  </data>
   <data name="&gt;&gt;lbTitle.Name" xml:space="preserve">
     <value>lbTitle</value>
-  </data>
-  <data name="btnCoverImage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>512, 222</value>
   </data>
   <data name="&gt;&gt;tbSubject.Name" xml:space="preserve">
     <value>tbSubject</value>
@@ -585,8 +582,8 @@
   <data name="&gt;&gt;lbSubject.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>Form1</value>
+  <data name="btnCoverImage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>512, 222</value>
   </data>
   <data name="tbSubject.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -642,9 +639,6 @@
   <data name="&gt;&gt;tbGenerateEpub.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="lbFolderRule.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;cmBFolder.Name" xml:space="preserve">
     <value>cmBFolder</value>
   </data>
@@ -657,8 +651,8 @@
   <data name="tbLanguage.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="&gt;&gt;rBSelectedDocs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbFolder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 12</value>
@@ -678,17 +672,23 @@
   <data name="lbLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 12</value>
   </data>
+  <data name="&gt;&gt;rBSelectedDocs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;tbFolderRule.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>HtmlRule</value>
   </data>
-  <data name="lbAuthor.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;lbAuthor.Parent" xml:space="preserve">
+    <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;lbSubject.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="lbAuthor.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="tbGenerateEpub.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -723,8 +723,8 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>701, 543</value>
   </data>
-  <data name="&gt;&gt;tbFolderRule.Name" xml:space="preserve">
-    <value>tbFolderRule</value>
+  <data name="rBSelectedDocs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;rBRootFolder.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -756,14 +756,14 @@
   <data name="checkBoxFonts.Text" xml:space="preserve">
     <value>Embed fonts</value>
   </data>
-  <data name="cmBFolder.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left, Right</value>
-  </data>
   <data name="&gt;&gt;lbLanguage.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;checkBoxFonts.Name" xml:space="preserve">
     <value>checkBoxFonts</value>
+  </data>
+  <data name="rBRootFolder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 16</value>
   </data>
   <data name="tbLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>413, 21</value>
@@ -780,8 +780,8 @@
   <data name="&gt;&gt;lbLanguage.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="rBSelectedDocs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="cmBFolder.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
   </data>
   <data name="tbImageRule.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 21</value>
@@ -789,8 +789,8 @@
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;tbFolder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lbTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -798,10 +798,4 @@
   <data name="&gt;&gt;tbHtmlRule.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>zh-CN</value>
-  </metadata>
 </root>

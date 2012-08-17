@@ -250,21 +250,27 @@ namespace Epub
         /// Generate document and save to specified filename
         /// </summary>
         /// <param name="epubFile">document's filename</param>
-        public void Generate(string epubFile, string tempPath)
+        public void Generate(string epubFile)
         {
             WriteOpf("content.opf");
             WriteNcx("toc.ncx");
             WriteContainer();
 
-            ZipFile zip = new ZipFile();
-            zip.EmitTimesInWindowsFormatWhenSaving = false;
-            var entry = zip.AddEntry("mimetype", "application/epub+zip", Encoding.UTF8);
-            entry.CompressionLevel = Ionic.Zlib.CompressionLevel.Default;
-            zip.ProvisionalAlternateEncoding = Encoding.UTF8;
-            zip.AddDirectory(tempPath);
-            zip.Save(epubFile);
-           
+            using (ZipFile zip = new ZipFile( ))
+            {
+                zip.EmitTimesInWindowsFormatWhenSaving = false;
+                var entry = zip.AddEntry("mimetype", "application/epub+zip", Encoding.UTF8);
+                entry.CompressionLevel = Ionic.Zlib.CompressionLevel.Default;
+                zip.AlternateEncoding = Encoding.UTF8;
+                zip.AlternateEncodingUsage = ZipOption.Always;
+                zip.AddDirectory(GetTempDirectory());
+                zip.Save(epubFile);
+            }
         }
+
+
+        
+
 
         private string AddEntry(string path, string type)
         {
