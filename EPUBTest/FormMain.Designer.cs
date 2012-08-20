@@ -34,6 +34,7 @@
             this.axWizCategoryTree = new AxWizKMControlsLib.AxWizCategoryCtrl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnCoverImage = new System.Windows.Forms.Button();
             this.picCover = new System.Windows.Forms.PictureBox();
             this.tbFolder = new System.Windows.Forms.TextBox();
@@ -62,7 +63,6 @@
             this.lbLogs = new System.Windows.Forms.ListBox();
             this.btnStart = new System.Windows.Forms.Button();
             this.saveFileDialogEPub = new System.Windows.Forms.SaveFileDialog();
-            this.label3 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axWizCategoryTree)).BeginInit();
@@ -139,6 +139,15 @@
             this.groupBox2.TabIndex = 48;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "EPub";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(267, 223);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(215, 12);
+            this.label3.TabIndex = 51;
+            this.label3.Text = "建议图片比例3:4,如600*800,300*400等";
             // 
             // btnCoverImage
             // 
@@ -401,15 +410,6 @@
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.tbGenerateEpub_Click);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(267, 223);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(215, 12);
-            this.label3.TabIndex = 51;
-            this.label3.Text = "建议图片比例3:4,如600*800,300*400等";
-            // 
             // FormMain
             // 
             this.AllowDrop = true;
@@ -419,6 +419,7 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnStart);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.Text = "为知笔记(Wiz)导出成EPub电子书";
