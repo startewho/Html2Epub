@@ -269,6 +269,8 @@ namespace Wiz2EPub
                 return;
             }
 
+            createTemp();//创建临时目录
+
             _documentOrder = 0;//重新初始化计数
             _folderOrder = 0;
             _playorder = 1;//重新初始化，从1开始，0表示封面的编号
@@ -301,15 +303,22 @@ namespace Wiz2EPub
 
             ExportWizFolder(_temppath, axWizCategoryTree.SelectedFolder as WizFolder, null, true, epub);
            
+            AddLog("正在生成EPub文件,请稍候...");
             try
             {
                 epub.Generate(tbEPubFilePath.Text);
-                AddLog("生成EPUB完成：" + tbEPubFilePath.Text);
+                AddLog("生成EPub完成：" + tbEPubFilePath.Text);
             }
             catch (Exception ex)
             {
                 AddLog("失败:" + ex.Message);
             }
+
+            AddLog("正在清理临时文件,请稍候...");
+           
+            clearTemp();//清理缓存
+            
+            AddLog("完成");            
             
         }
 
@@ -375,20 +384,10 @@ namespace Wiz2EPub
          */
         private void FormMain_Load(object sender, EventArgs e)
         {
-            try
-            {
-                System.IO.Directory.CreateDirectory(_temppath);
-
-            }
-            catch (Exception ex)
-            {
-                AddLog(ex.Message);
-                return;
-            }
+            
 
             initWiz();
             axWizCategoryTree.EventsListener = this;
-
 
             picCover.SizeMode = PictureBoxSizeMode.StretchImage;
             picCover.ImageLocation = Path.Combine(Application.StartupPath, "cover.png");
@@ -438,7 +437,6 @@ namespace Wiz2EPub
             }
         }
 
-
         delegate void delegateIncrementProgress();
 
         public void IncrementProgress()
@@ -459,7 +457,7 @@ namespace Wiz2EPub
         //退出时清理缓存
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            clearTemp();//清理缓存
+            
         }
         /*
          * 清理临时目录
@@ -475,6 +473,20 @@ namespace Wiz2EPub
                 AddLog(ex.Message);
             }
 
+        }
+
+        private void createTemp()
+        {
+            try
+            {
+                System.IO.Directory.CreateDirectory(_temppath);
+
+            }
+            catch (Exception ex)
+            {
+                AddLog(ex.Message);
+                return;
+            }
         }
 
         [DispId(0)]
