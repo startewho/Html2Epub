@@ -117,7 +117,7 @@ namespace Wiz2EPub
             {
                 if (isroot)
                 {
-                    epub.AddNavPoint(wizfolder.Name + " 目录", folderindexname, _playorder++);//创建节点
+                    epub.AddNavPoint(wizfolder.Name + " 目录", "root.html", _playorder++);//创建节点
                     contentNav = null;
                 }
                 else
@@ -129,9 +129,9 @@ namespace Wiz2EPub
             {
                 contentNav = nav.AddNavPoint(wizfolder.Name, folderindexname, _playorder++);//创建节点
             }
-            Parallel.For(0, documents.count, i =>
-                    {
-                        WizDocument objDoc = documents[i];
+
+            foreach(WizDocument objDoc in documents)
+            {
                         string name = objDoc.Title;
                         string fileindex = getDocumentFileName(name);
                         string filename =  fileindex + ".html";
@@ -154,20 +154,20 @@ namespace Wiz2EPub
                             string resfullpath = Path.Combine(path, respath);
                             if (Directory.Exists(resfullpath))//不存在则不处理子目录
                             {
-                                Parallel.ForEach(GetFiles(resfullpath, tbImageRule.Text), imgfile =>
-                                {
+                               foreach(FileInfo imgfile in GetFiles(resfullpath, tbImageRule.Text))
+                               {
                                     epub.AddImageFile(imgfile.FullName, Path.Combine(respath, imgfile.Name));
-                                });
+                                }
 
-                                Parallel.ForEach(GetFiles(resfullpath, ".css;"), cssFile =>
+                                foreach(FileInfo cssFile in GetFiles(resfullpath, ".css;"))
                                 {
                                     epub.AddStylesheetFile(cssFile.FullName, Path.Combine(respath, cssFile.Name));
-                                });
+                                }
                             }
 
                             
                             //加入到navpoint中
-                            if (contentNav == null)//如果是根目录，则加入到根目录
+                            if (isroot)//如果是根目录，则加入到根目录
                             {
                                 epub.AddNavPoint(name, filename, _playorder++);
                             }
@@ -183,15 +183,13 @@ namespace Wiz2EPub
 
                         IncrementProgress();
 
-                    }
-                );
+            }
 
-            categoryhtml = categoryhtml.Replace("%%TITLE%%", path);
+            categoryhtml = categoryhtml.Replace("%%TITLE%%", wizfolder.Name);
             categoryhtml = categoryhtml.Replace("%%CONTENT%%", categorycontent.ToString());
 
 
             epub.AddXhtmlData(folderindexname, categoryhtml);//写入content
-
 
             return contentNav;//返回nav节点
             //categoryhtml
