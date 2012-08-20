@@ -250,7 +250,11 @@ namespace Corsis.Diagnostics
                         if (process != null)
                         {
                             Console.WriteLine(" KILLED > {0}", process.Id);
-                            process.Kill();
+                            try
+                            {
+                                process.Kill();
+                            }
+                            catch { }
                         }
                     }
                 }

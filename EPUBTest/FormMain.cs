@@ -152,8 +152,13 @@ namespace Wiz2EPub
 
             epub.AddXhtmlData(folderindexname, categoryhtml);//写入content
 
+            //需要对key先排序，fileindex定长，根据asc排序
+
+            ArrayList keylist=  new ArrayList(hsTemp.Keys);
+            keylist.Sort();
+
             //第二次循环再加入数据
-            foreach(object key in hsTemp.Keys)
+            foreach (object key in keylist)
             {
                 string fileindex = key as string;
                 WizDocument objDoc = hsTemp[key] as WizDocument;
@@ -225,7 +230,7 @@ namespace Wiz2EPub
        {
             ++_documentOrder;
             var sb = new StringBuilder();
-            var newname = sb.AppendFormat("node{0:000}", _documentOrder).ToString();
+            var newname = sb.AppendFormat("node{0:00000}", _documentOrder).ToString();
 //            dic.Add(newname, name);
             return newname;
        }
@@ -286,7 +291,7 @@ namespace Wiz2EPub
                 FileInfo imgfile = new FileInfo(picCover.ImageLocation);
                 if (imgfile.Exists)
                 {
-                    string imgname = "cover" + imgfile.Extension;
+                    string imgname = "cover" + imgfile.Extension.ToLower();
                     epub.AddImageFile(imgfile.FullName, imgname);
                     epub.AddNavPoint("封面", "cover.xhtml", _playorder++);
                     string html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Cover</title><style type=\"text/css\"> img { max-width: 100%; } </style></head><body><div id=\"cover-image\"><img src=\"" + imgname + "\" alt=\"为知笔记电子书\"/></div></body></html>";
