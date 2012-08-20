@@ -10,6 +10,7 @@ using Epub;
 using WizKMCoreLib;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using System.Collections;
 //第三方的.dll
 
 namespace Wiz2EPub
@@ -131,66 +132,83 @@ namespace Wiz2EPub
                 contentNav = nav.AddNavPoint(wizfolder.Name, folderindexname, _playorder++);//创建节点
             }
 
-            foreach(WizDocument objDoc in documents)
+            //第一次循环，生成catelog.html
+            Hashtable hsTemp = new Hashtable();
+            
+            AddLog("正在生成目录:" + wizfolder.Name);
+            foreach (WizDocument objDoc in documents)
             {
-                        string name = objDoc.Title;
-                        string fileindex = getDocumentFileName(name);
-                        string filename =  fileindex + ".html";
-                        string filefullname = Path.Combine(path, filename);
+                string name = objDoc.Title;
+                string fileindex = getDocumentFileName(name);
+                string filename = fileindex + ".html";
 
-                        AddLog("正在处理:" + wizfolder.Location + name);
+                hsTemp.Add(fileindex, objDoc);//加入到临时hashmap中
 
-                        try
-                        {
-                            objDoc.SaveToHtml(filefullname, flags);
-                            html2xhtmlWithCss(filefullname);//转换为xhtml格式
-
-                            epub.AddXhtmlFile(filefullname, filename);//写入到epub中
-
-                            StringBuilder stringBuilder = categorycontent.AppendFormat("<div><a href=\"{0}\">{1}</a></div>\r\n", filename, name);
-                            //加入到content中
-
-                            //加入所有资源文件
-                            string respath = fileindex + "_files";
-                            string resfullpath = Path.Combine(path, respath);
-                            if (Directory.Exists(resfullpath))//不存在则不处理子目录
-                            {
-                               foreach(FileInfo imgfile in GetFiles(resfullpath, tbImageRule.Text))
-                               {
-                                    epub.AddImageFile(imgfile.FullName, Path.Combine(respath, imgfile.Name));
-                                }
-
-                                foreach(FileInfo cssFile in GetFiles(resfullpath, ".css;"))
-                                {
-                                    epub.AddStylesheetFile(cssFile.FullName, Path.Combine(respath, cssFile.Name));
-                                }
-                            }
-
-                            
-                            //加入到navpoint中
-                            if (isroot)//如果是根目录，则加入到根目录
-                            {
-                                epub.AddNavPoint(name, filename, _playorder++);
-                            }
-                            else
-                            {
-                                contentNav.AddNavPoint(name, filename, _playorder++);
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                             AddLog("导出html失败:" + e.Message);
-                        }
-
-                        IncrementProgress();
-
+                StringBuilder stringBuilder = categorycontent.AppendFormat("<div><a href=\"{0}\">{1}</a></div>\r\n", filename, name);
             }
 
             categoryhtml = categoryhtml.Replace("%%TITLE%%", wizfolder.Name);
             categoryhtml = categoryhtml.Replace("%%CONTENT%%", categorycontent.ToString());
 
-
             epub.AddXhtmlData(folderindexname, categoryhtml);//写入content
+
+            //第二次循环再加入数据
+            foreach(object key in hsTemp.Keys)
+            {
+                string fileindex = key as string;
+                WizDocument objDoc = hsTemp[key] as WizDocument;
+
+                string name = objDoc.Title;
+                string filename =  fileindex + ".html";
+                string filefullname = Path.Combine(path, filename);
+                
+                AddLog("正在处理:" + wizfolder.Location + name);
+
+                try
+                {
+                    objDoc.SaveToHtml(filefullname, flags);
+                    html2xhtmlWithCss(filefullname);//转换为xhtml格式
+
+                    epub.AddXhtmlFile(filefullname, filename);//写入到epub中
+
+                    //加入到content中
+
+                    //加入所有资源文件
+                    string respath = fileindex + "_files";
+                    string resfullpath = Path.Combine(path, respath);
+                    if (Directory.Exists(resfullpath))//不存在则不处理子目录
+                    {
+                        foreach(FileInfo imgfile in GetFiles(resfullpath, tbImageRule.Text))
+                        {
+                            epub.AddImageFile(imgfile.FullName, Path.Combine(respath, imgfile.Name));
+                        }
+
+                        foreach(FileInfo cssFile in GetFiles(resfullpath, ".css;"))
+                        {
+                            epub.AddStylesheetFile(cssFile.FullName, Path.Combine(respath, cssFile.Name));
+                        }
+                    }
+
+                            
+                    //加入到navpoint中
+                    if (isroot)//如果是根目录，则加入到根目录
+                    {
+                        epub.AddNavPoint(name, filename, _playorder++);
+                    }
+                    else
+                    {
+                        contentNav.AddNavPoint(name, filename, _playorder++);
+                    }
+                }
+                catch (Exception e)
+                {
+                        AddLog("导出html失败:" + e.Message);
+                }
+
+                IncrementProgress();
+
+            }
+
 
             return contentNav;//返回nav节点
             //categoryhtml
