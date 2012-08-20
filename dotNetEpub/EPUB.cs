@@ -81,7 +81,15 @@ namespace Epub
         /// </summary>
         ~Document()
         {
-            if (!String.IsNullOrEmpty(_tempDirectory) && Directory.Exists(_tempDirectory))
+
+        }
+
+        /*
+         * 清理临时目录 主动调用
+         */
+        private void clearTempDir()
+        {
+              if (!String.IsNullOrEmpty(_tempDirectory) && Directory.Exists(_tempDirectory))
                 Directory.Delete(_tempDirectory, true);
         }
 
@@ -266,6 +274,8 @@ namespace Epub
                 zip.AddDirectory(GetTempDirectory());
                 zip.Save(epubFile);
             }
+
+            clearTempDir();//清理临时目录
         }
 
 
