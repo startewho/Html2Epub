@@ -108,7 +108,7 @@ namespace Wiz2EPub
             var categorycontent = new StringBuilder(25);
             string categoryhtml = File.ReadAllText(Path.Combine(Application.StartupPath, "page.xhtml"));
 
-            categorycontent.Append("<h1>Content</h1>\r\n");
+            categorycontent.Append("<h1>目录</h1>\r\n");
 
             string folderindexname = getFolderFileName(wizfolder.Name) + ".html";
            
@@ -119,7 +119,7 @@ namespace Wiz2EPub
                 if (isroot)
                 {
                     folderindexname = "root.html";
-                    epub.AddNavPoint(wizfolder.Name + " 目录", folderindexname, _playorder++);//创建节点
+                    epub.AddNavPoint("目录", folderindexname, _playorder++);//创建节点
                     contentNav = null;
                 }
                 else
