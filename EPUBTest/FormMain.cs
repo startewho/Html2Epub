@@ -117,7 +117,8 @@ namespace Wiz2EPub
             {
                 if (isroot)
                 {
-                    epub.AddNavPoint(wizfolder.Name + " 目录", "root.html", _playorder++);//创建节点
+                    folderindexname = "root.html";
+                    epub.AddNavPoint(wizfolder.Name + " 目录", folderindexname, _playorder++);//创建节点
                     contentNav = null;
                 }
                 else
