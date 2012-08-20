@@ -288,7 +288,7 @@ namespace Wiz2EPub
                 {
                     string imgname = "cover" + imgfile.Extension;
                     epub.AddImageFile(imgfile.FullName, imgname);
-                    epub.AddNavPoint("cover", "cover.xhtml", _playorder++);
+                    epub.AddNavPoint("封面", "cover.xhtml", _playorder++);
                     string html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Cover</title><style type=\"text/css\"> img { max-width: 100%; } </style></head><body><div id=\"cover-image\"><img src=\"" + imgname + "\" alt=\"为知笔记电子书\"/></div></body></html>";
                     epub.AddXhtmlData("cover.xhtml", html);
                 }
