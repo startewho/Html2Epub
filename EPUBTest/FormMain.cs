@@ -183,15 +183,19 @@ namespace Wiz2EPub
                     string resfullpath = Path.Combine(path, respath);
                     if (Directory.Exists(resfullpath))//不存在则不处理子目录
                     {
-                        foreach(FileInfo imgfile in GetFiles(resfullpath, tbImageRule.Text))
-                        {
-                            epub.AddImageFile(imgfile.FullName, Path.Combine(respath, imgfile.Name));
-                        }
+                        //foreach(FileInfo imgfile in GetFiles(resfullpath, tbImageRule.Text))
+                        //{
+                        //    epub.AddImageFile(imgfile.FullName, Path.Combine(respath, imgfile.Name));
+                        //}
 
-                        foreach(FileInfo cssFile in GetFiles(resfullpath, ".css;"))
-                        {
-                            epub.AddStylesheetFile(cssFile.FullName, Path.Combine(respath, cssFile.Name));
-                        }
+                        //foreach(FileInfo cssFile in GetFiles(resfullpath, ".css;"))
+                        //{
+                        //    epub.AddStylesheetFile(cssFile.FullName, Path.Combine(respath, cssFile.Name));
+                        //}
+                        Parallel.ForEach(GetFiles(resfullpath, tbImageRule.Text), imgfile => epub.AddImageFile(imgfile.FullName, Path.Combine(respath, imgfile.Name)));
+
+                        Parallel.ForEach(GetFiles(resfullpath, ".css;"), cssFile => epub.AddStylesheetFile(cssFile.FullName, Path.Combine(respath, cssFile.Name)));
+
                     }
 
                             
