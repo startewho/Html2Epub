@@ -110,7 +110,7 @@ namespace Wiz2EPub
 
             categorycontent.Append("<h1>目录</h1>\r\n");
 
-            string folderindexname = getFolderFileName(wizfolder.Name) + ".html";
+            string folderindexname = getFolderFileName(wizfolder.Name) + ".xhtml";
            
             NavPoint contentNav = null;
 
@@ -118,7 +118,7 @@ namespace Wiz2EPub
             {
                 if (isroot)
                 {
-                    folderindexname = "root.html";
+                    folderindexname = "root.xhtml";
                     epub.AddNavPoint("目录", folderindexname, _playorder++);//创建节点
                     contentNav = null;
                 }
@@ -140,7 +140,7 @@ namespace Wiz2EPub
             {
                 string name = objDoc.Title;
                 string fileindex = getDocumentFileName(name);
-                string filename = fileindex + ".html";
+                string filename = fileindex + ".xhtml";
 
                 hsTemp.Add(fileindex, objDoc);//加入到临时hashmap中
 
@@ -164,7 +164,7 @@ namespace Wiz2EPub
                 WizDocument objDoc = hsTemp[key] as WizDocument;
 
                 string name = objDoc.Title;
-                string filename =  fileindex + ".html";
+                string filename =  fileindex + ".xhtml";
                 string filefullname = Path.Combine(path, filename);
                 
                 AddLog("正在处理:" + wizfolder.Location + name);
@@ -236,7 +236,7 @@ namespace Wiz2EPub
        }
 
        private static int _folderOrder = 0;//自动计数2
-       private string getFolderFileName(String foldername)
+       private string getFolderFileName(string foldername)
        {
            ++_folderOrder;
            var sb = new StringBuilder();
