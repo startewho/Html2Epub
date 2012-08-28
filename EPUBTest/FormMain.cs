@@ -13,6 +13,8 @@ using System.Text.RegularExpressions;
 using System.Collections;
 //第三方的.dll
 
+
+
 namespace Wiz2EPub
 {
 
@@ -426,7 +428,7 @@ namespace Wiz2EPub
             if (this.lbConvert.InvokeRequired)
             {
                 delegateAddLog d = new delegateAddLog(AddLog);
-                this.Invoke(d, new object[] { msg });
+                this.Invoke(d,  msg);
             }
             else
             {
@@ -606,7 +608,7 @@ namespace Wiz2EPub
             //调用html2xhtml代码
             temp = Corsis.Xhtml.Html2Xhtml.RunAsFilter(stdin => stdin.Write(temp)).ReadToEnd();
             temp = Corsis.Xhtml.Html2XhtmlExtensions.RipNamespace(temp);
-            temp = Regex.Replace(temp, "FONT-FAMILY[^;]+?;", "", RegexOptions.IgnoreCase);
+            temp = Regex.Replace(temp, "FONT-FAMILY[^;|^\"]+?[;|\"]", "", RegexOptions.IgnoreCase);
             temp = Regex.Replace(temp, "</head>", " <link href='style.css' rel='stylesheet' type='text/css' />\r\n</head>", RegexOptions.IgnoreCase);
             sw.Write(temp);
             sw.Close();
