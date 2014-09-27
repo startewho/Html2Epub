@@ -35,6 +35,9 @@ namespace Wiz2EPub
         public FormMain()
         {
             InitializeComponent();
+    
+            
+
         }
 
         private Dictionary<string, string> dic;
@@ -55,7 +58,7 @@ namespace Wiz2EPub
         /**
          * 创建导航目录
          */
-
+     
         private static int _playorder = 0;//自动累加计数
         /// <summary>
         /// 删除指定字符串，在ncx文件中#等符号不能正确使用
@@ -105,14 +108,23 @@ namespace Wiz2EPub
          */
         private NavPoint ExportWizFolderDocuments(WizFolder wizfolder, string path, NavPoint nav, bool isroot, Document epub, int flags)
         {
-            WizDocumentCollection documents = wizfolder.Documents;
-            //将文件导出为ziw，同时生成本节点的索引
-            var categorycontent = new StringBuilder(25);
-            string categoryhtml = File.ReadAllText(Path.Combine(Application.StartupPath, "page.xhtml"));
+            string strBy = cbBy.SelectedItem as string;
+            string strSort = cbSort.SelectedItem as string;
+            if (strBy == String.Empty || strSort == string.Empty)
+                {
+                    strBy = "Title";
+                    strSort = "Asc";
+                }
 
-            categorycontent.Append("<h1>目录</h1>\r\n");
+                WizDocumentCollection documents = wizfolder.GetDocuments3(0, strBy, strSort);
+                //将文件导出为ziw，同时生成本节点的索引
+                var categorycontent = new StringBuilder(25);
+                string categoryhtml = File.ReadAllText(Path.Combine(Application.StartupPath, "page.xhtml"));
 
-            string folderindexname = getFolderFileName(wizfolder.Name) + ".xhtml";
+                categorycontent.Append("<h1>目录</h1>\r\n");
+                categorycontent.Append("<h1>目录</h1>\r\n");
+
+                string folderindexname = getFolderFileName(wizfolder.Name) + ".xhtml";
            
             NavPoint contentNav = null;
 
@@ -613,5 +625,7 @@ namespace Wiz2EPub
             sw.Write(temp);
             sw.Close();
         }
+
+       
     }
 }
