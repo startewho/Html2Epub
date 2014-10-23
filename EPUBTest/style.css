@@ -76,12 +76,7 @@
 	url(res:///media/fonts/kt.ttf),
 	url(res:///sdcard/fonts/kt.ttf),
 	url(res:///system/fonts/DroidSansFallback.ttf),
-	url(res:///mnt/MOVIFAT/font/kt.ttf),
-	url(res:///media/flash/fonts/kt.ttf),
-	url(res:///media/sd/fonts/kt.ttf),
-	url(res:///opt/onyx/arm/lib/fonts/AdobeHeitiStd-Regular.otf),
-	url(res:///../../fonts/kt.ttf),
-	url(res:///../fonts/kt.ttf);
+
 }
 @font-face {
 	font-family:"ktpy";
@@ -129,11 +124,7 @@
 	url(res:///sdcard/fonts/ht.ttf),
 	url(res:///system/fonts/DroidSansFallback.ttf),
 	url(res:///mnt/MOVIFAT/font/ht.ttf),
-	url(res:///media/flash/fonts/ht.ttf),
-	url(res:///media/sd/fonts/ht.ttf),
-	url(res:///opt/onyx/arm/lib/fonts/AdobeHeitiStd-Regular.otf),
-	url(res:///../../fonts/ht.ttf),
-	url(res:///../fonts/ht.ttf);
+
 }
 @font-face {
 	font-family:"h1";

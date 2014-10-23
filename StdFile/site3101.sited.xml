@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<site ver="6" debug="1" sds="http://sited.noear.org/api.3/">
+    <ua></ua>
+    <title>飘天文学网</title>
+	<author>JustCheng</author>
+    <intro>飘天文学网/小说...</intro>
+    <key>http://www.piaotian.net/</key>
+    <url>http://www.piaotian.net/</url>
+    <expr>\.piaotian\.net</expr>
+    <logo></logo>
+    <encode>GBK</encode>
+	<main dtype="2">
+		<home>
+			
+			<updates cache="1d"  title="更新" method="get"  parse="updates_parse" url="http://www.piaotian.net/booktoplastupdate/0/1.html"  />
+			<tags   title="分类"  method="get" parse="tags_parse">
+				<item title="玄幻魔法" url="http://www.piaotian.net/booksort1/0/@page.html" />
+				<item title="武侠修真" url="http://www.piaotian.net/booksort2/0/@page.html" />
+				<item title="都市言情" url="http://www.piaotian.net/booksort3/0/@page.html" />
+				<item title="历史军事" url="http://www.piaotian.net/booksort4/0/@page.html" />
+				<item title="网游竞技" url="http://www.piaotian.net/booksort5/0/@page.html" />
+				<item title="科幻小说" url="http://www.piaotian.net/booksort6/0/@page.html" />
+				<item title="恐怖灵异" url="http://www.piaotian.net/booksort7/0/@page.html" />
+				<item title="同人漫画" url="http://www.piaotian.net/booksort8/0/@page.html" />
+				<item title="其他类型" url="http://www.piaotian.net/booksort9/0/@page.html" />
+				<item title="全本小说" url="http://www.piaotian.net/quanben/index.html?page=@page" />
+				
+			</tags>
+		</home>
+        <search cache="1d"  method="post"  parse="search_parse" url="http://www.piaotian.net/modules/article/search.php?searchtype=articlename&amp;searchkey=@key&amp;page=@page" />
+        <tag cache="0" method="get" parse="tags_parse" />
+        <book cache="1d"    method="get"  parse="book_parse"  expr="\/\d+\/" />
+        <section cache="1"  method="get"  parse="section_parse" />
+    </main>
+    <jscript>
+		<code>
+        <![CDATA[
+
+
+function bookUrl(url){
+	if(url.indexOf("http")<0)
+		return "http://www.piaotian.net/"+url;
+	else
+		return url;
+}
+
+function hots_parse(url,html) {
+    var list = [];
+    var reg  = /<td class="odd"><a href="([^"]+)">([^<]+)[^\b]+? target="_blank">([^<]+)<\/a>[^\b]+?class="odd">([^<]+)[^\b]+?lass="odd" align="center">([^<]+)[^\b]+? class="even" align="center">([^<]+)<\/td>/gm;
+
+	var rst;
+	while((rst = reg.exec(html))!=null){
+		var bm = {};
+		bm.name= rst[7].replace(/&nbsp;/gi,"");
+		bm.url = bookUrl(rst[1]);
+		bm.logo = rst[2];
+
+		list.push(bm);
+	}
+    return JSON.stringify(list);
+}
+
+function updates_parse(url,html) {
+	var list = [];
+   	var reg  = /<td class="odd"><a href="([^"]+)">([^<]+)[^\b]+? target="_blank">([^<]+)<\/a>[^\b]+?class="odd">([^<]+)[^\b]+?lass="odd" align="center">([^<]+)[^\b]+? class="even" align="center">([^<]+)<\/td>/gm;
+	var rst;
+	while((rst = reg.exec(html))!=null){
+			var bm = {};
+		bm.name= rst[2];
+		bm.author=rst[4];
+		bm.logo=getsbooklogo_url(rst[1]);
+		bm.url = getbook_url(rst[1]);
+		bm.updateTime = rst[5];
+		bm.newSection = rst[3];
+
+		list.push(bm);
+	}
+    return JSON.stringify(list);
+}
+
+
+function search_parse(url, html) {
+    var list = [];
+    html = html.trim();
+    var start = html.indexOf('[');
+    var jList = JSON.parse(html.substring(start, html.length - 1));
+
+    var rst;
+    for (var i = 0, len = jList.length; i < len; i++) {
+        var jm = jList[i];
+
+        var bm = {};
+        bm.name = jm.full_name;
+        bm.url = bookUrl(jm.lnovel_url.replace("..",""));
+        bm.logo = jm.image_url.replace("..", "http://xs.dmzj.com");
+        bm.newSection = "";
+        bm.updateTime = "";
+        bm.author = unescape(jm.author);
+        bm.status = "";
+        list.push(bm);
+    }
+    return JSON.stringify(list);
+}
+
+function tags_parse(url,html) {
+	var list = [];
+	var reg  = /<td class="odd"><a href="([^"]+)">([^<]+)[^\b]+? target="_blank">([^<]+)<\/a>[^\b]+?class="odd">([^<]+)[^\b]+?lass="odd" align="center">([^<]+)[^\b]+? class="even" align="center">([^<]+)<\/td>/gm;
+
+	var rst;
+	while((rst = reg.exec(html))!=null)
+	{
+		var bm = {};
+		bm.name= rst[2];
+		bm.author=rst[4];
+		bm.logo=getsbooklogo_url(rst[1]);
+		bm.url = getbook_url(rst[1]);
+		bm.updateTime = rst[5];
+		bm.newSection = rst[3];
+
+		list.push(bm);
+	}
+	return JSON.stringify(list);
+}
+
+
+
+function book_parse(url,html) {
+	var data={};
+
+	data.name =   html.match(/<h1>([^<]*)/i)[1];
+	data.author = html.match(/作者：([^<]*)/i)[1].replace("&nbsp;","");
+	data.updateTime="";
+	data.sections=[];
+
+	var reg = /<a href="(\d[^"]+)">([^<]+)<\/a>/gm;
+	var rst;
+	while((rst = reg.exec(html))!=null){
+		var sectionurl=getsection_url(url,rst[1]);
+		var sm = {url:sectionurl,name:rst[2]};
+		data.sections.splice(0, 0, sm);
+	}
+	return JSON.stringify(data);
+}
+
+function getbook_url(url) {
+
+var bookurl= url.replace(".html","/index.html").replace("bookinfo","html");
+return bookurl;
+}
+
+function getsection_url(url,sectionurl) {
+
+var absoulteurl= url.replace("index.html",sectionurl);
+return absoulteurl;
+}
+function getsbooklogo_url(bookurl) {
+var logourl=bookurl.replace("/bookinfo","").replace(".html","/").replace("www","image");
+var reg = /(\d+(?=\.))/g;
+if((rst = reg.exec(bookurl))!=null)
+{
+var name=rst[1]+"s.jpg";
+logourl=logourl+name;
+return logourl;
+}
+return "";
+}
+
+function book_key(url) {
+	return url.match(/(\d+)/i)[1];
+}
+function book_contents(html) {
+
+	return url;
+}
+
+function section_parse(url,html) {
+	var start = html.indexOf("</tr></tbody></table>");
+	var end = html.indexOf("<center><script language=\"javascript\"");
+
+	var body = html.substring(start,end);
+
+	return "<html><body>"+body+"</body></html>";
+}
+
+
+function section_key(url) {
+	return url;
+}
+
+
+    ]]>
+		</code>
+    </jscript>
+</site>

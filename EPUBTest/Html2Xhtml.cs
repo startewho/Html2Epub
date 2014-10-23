@@ -12,7 +12,8 @@ using System.Diagnostics;
 using System.Reflection;
 
 using Corsis.Diagnostics;
-
+//add des
+//
 namespace Corsis.Xhtml
 {
     /// <summary>
@@ -117,6 +118,7 @@ namespace Corsis.Xhtml
                     return "-t basic-1.1";
                 case DocType.Xhtml_Print_1_0:
                     return "-t print-1.0";
+				break;
             }
             return null;
         }
