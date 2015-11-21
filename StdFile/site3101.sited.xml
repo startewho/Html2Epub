@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<site ver="6" debug="1" sds="http://sited.noear.org/api.3/">
+<site ver="1" debug="1" sds="http://sited.noear.org/api.3/">
     <ua></ua>
     <title>飘天文学网</title>
 	<author>JustCheng</author>
@@ -8,7 +8,7 @@
     <url>http://www.piaotian.net/</url>
     <expr>\.piaotian\.net</expr>
     <logo>http://www.piaotian.net/css/logo.gif</logo>
-    <encode>GBK</encode>
+    <encode>GB18030</encode>
 	<main dtype="2">
 		<home>
 			<hots  cache="1d"   title="热门" method="get"  parse="hots_parse" url="http://www.piaotian.net/"/>
