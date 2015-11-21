@@ -51,9 +51,8 @@ function hots_parse(url,html) {
 	while((rst = reg.exec(html))!=null){
 		var bm = {};
 		bm.name= rst[2].replace(/&nbsp;/gi,"");
-		bm.url = bookUrl(rst[1]);
+		bm.url = getbook_url(rst[1]);
 		bm.logo =getbooklogo_url(rst[1]);
-
 		list.push(bm);
 	}
     return JSON.stringify(list);
