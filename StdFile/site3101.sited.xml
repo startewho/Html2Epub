@@ -142,7 +142,7 @@ function book_contents(html) {
 }
 
 function section_parse(url,html) {
-	var start = html.indexOf("</tr></tbody></table>");
+	var start = html.indexOf("<br>");
 	var end = html.indexOf("<center><script language=\"javascript\"");
 
 	var body = html.substring(start,end);
