@@ -128,7 +128,7 @@ function book_parse(url,html) {
 	var data={};
 
 	data.name =   html.match(/<h1>([^<]*)/i)[1];
-	data.author = html.match(/作者：([^<]*)/i)[1].replace("&nbsp;","");
+	data.author = html.match(/作者：([^<]*)/i)[1].replace(/&nbsp;/g,"");
 	data.updateTime="";
 	data.sections=[];
 
