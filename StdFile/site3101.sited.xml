@@ -11,7 +11,7 @@
     <encode>GBK</encode>
 	<main dtype="2">
 		<home>
-			
+			<hots  cache="1d"   title="热门" method="get"  parse="hots_parse" url="http://www.piaotian.net/"/>
 			<updates cache="1d"  title="更新" method="get"  parse="updates_parse" url="http://www.piaotian.net/booktoplastupdate/0/1.html"  />
 			<tags   title="分类"  method="get" parse="tags_parse">
 				<item title="玄幻魔法" url="http://www.piaotian.net/booksort1/0/@page.html" />
@@ -46,14 +46,13 @@ function bookUrl(url){
 
 function hots_parse(url,html) {
     var list = [];
-    var reg  = /<td class="odd"><a href="([^"]+)">([^<]+)[^\b]+? target="_blank">([^<]+)<\/a>[^\b]+?class="odd">([^<]+)[^\b]+?lass="odd" align="center">([^<]+)[^\b]+? class="even" align="center">([^<]+)<\/td>/gm;
-
+    var reg  = /<td><a href="([^"]+)"[^\b]+?<u>([^<]+)<\/[a-z]+>/gm;
 	var rst;
 	while((rst = reg.exec(html))!=null){
 		var bm = {};
-		bm.name= rst[7].replace(/&nbsp;/gi,"");
+		bm.name= rst[2].replace(/&nbsp;/gi,"");
 		bm.url = bookUrl(rst[1]);
-		bm.logo = rst[2];
+		bm.logo =getbooklogo_url(rst[1]);
 
 		list.push(bm);
 	}
@@ -61,73 +60,40 @@ function hots_parse(url,html) {
 }
 
 function updates_parse(url,html) {
-	var list = [];
-   	var reg  = /<td class="odd"><a href="([^"]+)">([^<]+)[^\b]+? target="_blank">([^<]+)<\/a>[^\b]+?class="odd">([^<]+)[^\b]+?lass="odd" align="center">([^<]+)[^\b]+? class="even" align="center">([^<]+)<\/td>/gm;
-	var rst;
-	while((rst = reg.exec(html))!=null){
-			var bm = {};
-		bm.name= rst[2];
-		bm.author=rst[4];
-		bm.logo=getsbooklogo_url(rst[1]);
-		bm.url = getbook_url(rst[1]);
-		bm.updateTime = rst[5];
-		bm.newSection = rst[3];
-
-		list.push(bm);
-	}
-    return JSON.stringify(list);
+	return books_parse(url,html);
 }
 
 
 function search_parse(url, html) {
-    var list = [];
-    html = html.trim();
-    var start = html.indexOf('[');
-    var jList = JSON.parse(html.substring(start, html.length - 1));
-
-    var rst;
-    for (var i = 0, len = jList.length; i < len; i++) {
-        var jm = jList[i];
-
-        var bm = {};
-        bm.name = jm.full_name;
-        bm.url = bookUrl(jm.lnovel_url.replace("..",""));
-        bm.logo = jm.image_url.replace("..", "http://xs.dmzj.com");
-        bm.newSection = "";
-        bm.updateTime = "";
-        bm.author = unescape(jm.author);
-        bm.status = "";
-        list.push(bm);
-    }
-    return JSON.stringify(list);
+   	return books_parse(url,html);
 }
 
 function tags_parse(url,html) {
+	return books_parse(url,html);
+}
+
+function books_parse(url,html) {
 	var list = [];
 	var reg  = /<td class="odd"><a href="([^"]+)">([^<]+)[^\b]+? target="_blank">([^<]+)<\/a>[^\b]+?class="odd">([^<]+)[^\b]+?lass="odd" align="center">([^<]+)[^\b]+? class="even" align="center">([^<]+)<\/td>/gm;
-
 	var rst;
 	while((rst = reg.exec(html))!=null)
 	{
 		var bm = {};
 		bm.name= rst[2];
 		bm.author=rst[4];
-		bm.logo=getsbooklogo_url(rst[1]);
+		bm.logo=getbooklogo_url(rst[1]);
 		bm.url = getbook_url(rst[1]);
 		bm.updateTime = rst[5];
 		bm.newSection = rst[3];
-
 		list.push(bm);
 	}
 	return JSON.stringify(list);
 }
 
 
-
 function book_parse(url,html) {
 	var data={};
-
-	data.name =   html.match(/<h1>([^<]*)/i)[1];
+	data.name =html.match(/<h1>([^<]*)/i)[1];
 	data.author = html.match(/作者：([^<]*)/i)[1].replace(/&nbsp;/g,"");
 	data.updateTime="";
 	data.sections=[];
@@ -153,7 +119,8 @@ function getsection_url(url,sectionurl) {
 var absoulteurl= url.replace("index.html",sectionurl);
 return absoulteurl;
 }
-function getsbooklogo_url(bookurl) {
+
+function getbooklogo_url(bookurl) {
 var logourl=bookurl.replace("/bookinfo","").replace(".html","/").replace("www","image");
 var reg = /(\d+(?=\.))/g;
 if((rst = reg.exec(bookurl))!=null)
@@ -168,6 +135,7 @@ return "";
 function book_key(url) {
 	return url.match(/(\d+)/i)[1];
 }
+
 function book_contents(html) {
 
 	return url;
