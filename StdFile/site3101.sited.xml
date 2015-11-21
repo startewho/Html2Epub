@@ -12,7 +12,7 @@
 	<main dtype="2">
 		<home>
 			<hots  cache="1d"   title="热门" method="get"  parse="hots_parse" url="http://www.piaotian.net/"/>
-			<updates cache="1d"  title="更新" method="get"  parse="updates_parse" url="http://www.piaotian.net/booktoplastupdate/0/1.html"  />
+			<updates cache="1d"  title="更新" method="get"  parse="updates_parse" url="http://www.piaotian.net/booktoplastupdate/0/@page.html"  />
 			<tags   title="分类"  method="get" parse="tags_parse">
 				<item title="玄幻魔法" url="http://www.piaotian.net/booksort1/0/@page.html" />
 				<item title="武侠修真" url="http://www.piaotian.net/booksort2/0/@page.html" />
@@ -24,7 +24,6 @@
 				<item title="同人漫画" url="http://www.piaotian.net/booksort8/0/@page.html" />
 				<item title="其他类型" url="http://www.piaotian.net/booksort9/0/@page.html" />
 				<item title="全本小说" url="http://www.piaotian.net/quanben/index.html?page=@page" />
-				
 			</tags>
 		</home>
         <search cache="1d"  method="post"  parse="search_parse" url="http://www.piaotian.net/modules/article/search.php?searchtype=articlename&amp;searchkey=@key&amp;page=@page" />
