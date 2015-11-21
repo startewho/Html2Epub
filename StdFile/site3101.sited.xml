@@ -7,7 +7,7 @@
     <key>http://www.piaotian.net/</key>
     <url>http://www.piaotian.net/</url>
     <expr>\.piaotian\.net</expr>
-    <logo></logo>
+    <logo>http://www.piaotian.net/css/logo.gif</logo>
     <encode>GBK</encode>
 	<main dtype="2">
 		<home>
